@@ -22,13 +22,21 @@ Date: 2026-10-28. This file distinguishes implemented behavior from provider set
 
 The first database run exposed doubly serialized JSON state. The adapter now sends serialized state as text before the JSONB cast; the rollback, retry, and concurrency scenarios pass with the real SDK.
 
+## Production evidence
+
+- Public app: https://achievements-starter.vercel.app, deployed on 2026-10-28 from commit `f6650f8` through [implementation PR #13](https://github.com/dave-b-b/achievements-starter/pull/13).
+- Vercel account plan verified as Hobby. Framework preset corrected to Next.js, Node.js 24, with the production origin set to the verified free domain. No paid service or upgrade was enabled.
+- Twenty-six desktop and mobile scenarios passed against the public production URL: actual unlock/reset, all playground presets, generated builder code, public lessons, origin rejection, accessibility/overflow, optional tours, and keyboard dismissal. Screenshot-only scenarios were excluded from this production run.
+- GitHub verification passed on the implementation, including a fresh locked install, real Postgres scenarios, generated-example builds, production build, and desktop/mobile browser scenarios.
+- An isolated copy also passed unit checks and a production build with Engine 2.1.0 and React Achievements 6.0.0 package candidates. Those versions are not published dependencies of this app.
+
 ## Remaining external checks
 
-- Confirm Vercel Hobby and Supabase Free destinations, set provider environment values, and apply migrations to the chosen project.
+- Confirm the selected Supabase organization is Free, set production backend environment values, and apply migrations to the dedicated project. Production currently runs the public experience without a backend connection.
 - Exercise actual GitHub OAuth, sign-out/account switching, provider session refresh, and persistence through the deployed app.
 - Verify the selected Supabase Data API denies anonymous and authenticated direct access to progress tables. Local SQL role coverage is not a substitute for this provider-level check.
 - Complete a fresh-developer setup review and the 5–10 developer beta; no external integration or adoption gains are claimed.
-- Add the verified public URL and record the final walkthrough after deployment.
+- Record the final walkthrough after the authenticated journey is verified.
 
 ## Commands
 
