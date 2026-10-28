@@ -1,5 +1,6 @@
 'use client';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { X } from 'lucide-react';
 import type { NotificationProps, UIConfig } from 'react-achievements';
 import { AchievementDialog } from './achievement-collection';
@@ -10,7 +11,8 @@ function AchievementNotice({
   duration = 4500,
   stackIndex = 0,
   theme,
-}: NotificationProps) {
+  inGame = false,
+}: NotificationProps & { inGame?: boolean }) {
   const close = useRef(onClose);
   useEffect(() => {
     close.current = onClose;
@@ -21,7 +23,7 @@ function AchievementNotice({
   }, [duration]);
   return (
     <div
-      className={`achievement-notice notice-${theme || 'modern'}`}
+      className={`achievement-notice notice-${theme || 'modern'}${inGame ? ' arcade-achievement-notice' : ''}`}
       style={{ top: 16 + stackIndex * 116 }}
       role="status"
       data-testid="achievement-notice"
@@ -39,6 +41,14 @@ function AchievementNotice({
       </button>
     </div>
   );
+}
+
+// The SDK still decides when an achievement unlocks; only its presentation moves
+// into the playfield so the reward appears beside the action that earned it.
+export function ArcadeAchievementNotice(props: NotificationProps) {
+  const [stage, setStage] = useState<HTMLElement | null>(null);
+  useEffect(() => setStage(document.getElementById('arcade-stage')), []);
+  return stage ? createPortal(<AchievementNotice {...props} inGame />, stage) : null;
 }
 
 // The SDK owns unlock detection and confetti; this public UI override matches the starter.

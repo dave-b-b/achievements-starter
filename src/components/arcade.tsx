@@ -14,7 +14,7 @@ import {
   type GameEvent,
 } from '../game/engine';
 import { AchievementBoard } from './achievement-board';
-import { celebrationUI } from './celebrations';
+import { ArcadeAchievementNotice, celebrationUI } from './celebrations';
 
 const view = (game: Game) => ({
   phase: game.phase,
@@ -29,7 +29,8 @@ function Mission({ autoStart, onReplay }: { autoStart: boolean; onReplay: () => 
   const game = useRef(createGame(autoStart));
   const controls = useRef<Controls>({ left: false, right: false, up: false, down: false });
   const [hud, setHud] = useState(() => view(game.current));
-  const { track, trackMultiple, unlockedCount } = useSimpleAchievements();
+  const { track, trackMultiple, unlockedCount, totalCount, nextAchievement } =
+    useSimpleAchievements();
   const reward = useRef((event: GameEvent) => {});
   reward.current = (event) => {
     if (event.type === 'kill') trackMultiple({ score: event.score, comboThree: event.combo >= 3 });
@@ -146,11 +147,24 @@ function Mission({ autoStart, onReplay }: { autoStart: boolean; onReplay: () => 
             <dt>Badges</dt>
             <dd>
               <Trophy size={16} /> {unlockedCount}
-              <span> / 5</span>
+              <span> / {totalCount}</span>
             </dd>
           </dl>
         </div>
-        <div className="arcade-stage">
+        <div className="arcade-goal" data-testid="arcade-next-achievement">
+          <span>Next unlock</span>
+          <strong>{nextAchievement?.achievementTitle ?? 'Every badge earned'}</strong>
+          {nextAchievement?.progress ? (
+            <progress
+              value={nextAchievement.progress.current}
+              max={nextAchievement.progress.target}
+              aria-label={`${nextAchievement.achievementTitle} progress`}
+            />
+          ) : (
+            <small>{nextAchievement?.achievementDescription ?? 'Mission accomplished.'}</small>
+          )}
+        </div>
+        <div className="arcade-stage" id="arcade-stage">
           <canvas
             ref={canvas}
             width={WIDTH}
@@ -288,7 +302,7 @@ export function Arcade() {
       key={run}
       achievements={arcadeAchievements}
       storage={StorageType.Memory}
-      ui={{ ...celebrationUI, theme: 'gamified' }}
+      ui={{ ...celebrationUI, theme: 'gamified', NotificationComponent: ArcadeAchievementNotice }}
     >
       <Mission autoStart={run > 0} onReplay={() => setRun((value) => value + 1)} />
     </AchievementProvider>

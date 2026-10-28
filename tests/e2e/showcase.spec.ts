@@ -60,9 +60,12 @@ test('Starfall gameplay earns a real badge, pauses for its collection, and start
 }) => {
   await page.goto('/arcade');
   await expect(page.locator('.achievement-board .badge-card')).toHaveCount(5);
+  await expect(page.getByTestId('arcade-next-achievement')).toContainText('First contact');
   await page.getByRole('button', { name: 'Start mission', exact: true }).click();
   await expect(page.getByTestId('arcade-score')).not.toHaveText('0', { timeout: 10000 });
-  await expect(page.getByTestId('achievement-notice')).toContainText('First contact');
+  const inGameNotice = page.locator('#arcade-stage').getByTestId('achievement-notice');
+  await expect(inGameNotice).toContainText('First contact');
+  await expect(page.getByTestId('arcade-next-achievement')).not.toContainText('First contact');
   const collection = page.getByRole('button', { name: /^View all achievements:/ });
   await collection.click();
   const dialog = page.getByRole('dialog', { name: 'Your achievements', exact: true });
