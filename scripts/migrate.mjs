@@ -4,9 +4,9 @@ import { createHash } from 'node:crypto';
 const url = process.env.MIGRATION_DATABASE_URL || process.env.DATABASE_URL;
 if (!url) throw new Error('Set MIGRATION_DATABASE_URL or DATABASE_URL in your environment.');
 const local = ['localhost', '127.0.0.1', '[::1]'].includes(new URL(url).hostname);
-const ca = process.env.DATABASE_CA_FILE
-  ? await readFile(process.env.DATABASE_CA_FILE, 'utf8')
-  : undefined;
+const ca =
+  process.env.DATABASE_CA_CERT ||
+  (process.env.DATABASE_CA_FILE ? await readFile(process.env.DATABASE_CA_FILE, 'utf8') : undefined);
 const sql = postgres(url, {
   max: 1,
   prepare: false,

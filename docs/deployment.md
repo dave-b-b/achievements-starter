@@ -26,6 +26,7 @@ The public playground runs without the database. If Supabase pauses, saved-progr
    - `NEXT_PUBLIC_SUPABASE_URL`
    - `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`
    - `DATABASE_URL` (server-only; Supabase transaction pooler)
+   - `DATABASE_CA_CERT` (the root certificate PEM from Supabase Database Settings, preserving its real newlines; required for verified pooler TLS)
    - `APP_ORIGIN` (the canonical `https://YOUR_PROJECT.vercel.app` origin)
 6. Configure GitHub OAuth in Supabase and add the exact production `/auth/callback` URL to Supabase's redirect allowlist. The GitHub application's callback points to Supabase, as described in [setup](setup.md).
 7. Redeploy because public environment variables are included at build time. Smoke-test sign-in, completion, reload, sign-out, and another account. Verify the database API cannot directly read or write progress with browser-facing credentials.
