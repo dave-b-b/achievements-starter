@@ -1,7 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
   ArrowUpRight,
   BookOpen,
@@ -10,19 +10,34 @@ import {
   Gamepad2,
   GitFork as Github,
   Sparkles,
+  Menu,
   Terminal,
   X,
 } from 'lucide-react';
-const links = [
-  { href: '/', label: 'Overview', icon: Boxes },
-  { href: '/learn', label: 'Learn by doing', icon: BookOpen },
-  { href: '/playground', label: 'Playground', icon: Sparkles },
-  { href: '/arcade', label: 'Play Starfall', icon: Gamepad2 },
-  { href: '/setup', label: 'Use the starter', icon: Terminal },
-  { href: '/architecture', label: 'Under the hood', icon: Code2 },
+const navigationGroups = [
+  { label: 'Start here', links: [{ href: '/', label: 'Overview', icon: Boxes }] },
+  {
+    label: 'Try it',
+    links: [
+      { href: '/playground', label: 'Playground', icon: Sparkles },
+      { href: '/arcade', label: 'Play Starfall', icon: Gamepad2 },
+      { href: '/learn', label: 'Short course', icon: BookOpen },
+    ],
+  },
+  {
+    label: 'Build with it',
+    links: [
+      { href: '/setup', label: 'Get started', icon: Terminal },
+      { href: '/architecture', label: 'How it works', icon: Code2 },
+    ],
+  },
 ];
+const links = navigationGroups.flatMap((group) => group.links);
 export function Shell({ children }: { children: React.ReactNode }) {
   const path = usePathname();
+  const [menuOpen, setMenuOpen] = useState(false);
+  const menuButton = useRef<HTMLButtonElement>(null);
+  useEffect(() => setMenuOpen(false), [path]);
   const [expiredSignIn, setExpiredSignIn] = useState(false);
   useEffect(() => {
     setExpiredSignIn(
@@ -34,26 +49,54 @@ export function Shell({ children }: { children: React.ReactNode }) {
       <a className="skip-link" href="#main">
         Skip to content
       </a>
-      <aside className="sidebar">
-        <Link className="brand" href="/" aria-label="LearnQuest home">
-          <span className="brand-mark">
-            <Sparkles size={22} />
-          </span>{' '}
-          learnquest<span className="brand-dot">.</span>
-        </Link>
-        <div className="sidebar-label">THE LITTLE THINGS ADD UP</div>
-        <nav aria-label="Main navigation">
-          {links.map(({ href, label, icon: Icon }) => (
-            <Link
-              key={href}
-              href={href}
-              className={path === href ? 'nav-link active' : 'nav-link'}
-              aria-current={path === href ? 'page' : undefined}
-            >
-              <Icon size={18} />
-              {label}
-              {path === href && <span className="nav-dot" />}
-            </Link>
+      <aside
+        className="sidebar"
+        onKeyDown={(event) => {
+          if (event.key === 'Escape' && menuOpen) {
+            setMenuOpen(false);
+            menuButton.current?.focus();
+          }
+        }}
+      >
+        <div className="sidebar-heading">
+          <Link className="brand" href="/" aria-label="LearnQuest home">
+            <span className="brand-mark">
+              <Sparkles size={22} />
+            </span>{' '}
+            learnquest<span className="brand-dot">.</span>
+          </Link>
+          <button
+            ref={menuButton}
+            className="mobile-menu-button"
+            aria-expanded={menuOpen}
+            aria-controls="main-navigation"
+            onClick={() => setMenuOpen((open) => !open)}
+          >
+            {menuOpen ? <X size={18} /> : <Menu size={18} />}
+            {menuOpen ? 'Close' : 'Menu'}
+          </button>
+        </div>
+        <nav id="main-navigation" aria-label="Main navigation" data-open={menuOpen}>
+          {navigationGroups.map((group) => (
+            <div className="nav-group" key={group.label}>
+              <div className="nav-group-label">{group.label}</div>
+              {group.links.map(({ href, label, icon: Icon }) => (
+                <Link
+                  key={href}
+                  href={href}
+                  className={path === href ? 'nav-link active' : 'nav-link'}
+                  aria-current={path === href ? 'page' : undefined}
+                  onClick={() => {
+                    setMenuOpen(false);
+                    if (menuOpen) menuButton.current?.focus();
+                  }}
+                >
+                  <Icon size={18} />
+                  {label}
+                  {path === href && <span className="nav-dot" />}
+                </Link>
+              ))}
+            </div>
           ))}
         </nav>
         <div className="sidebar-bottom">

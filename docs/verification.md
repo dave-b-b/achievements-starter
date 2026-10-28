@@ -4,6 +4,7 @@ Date: 2026-10-28. This file distinguishes implemented behavior from provider set
 
 ## Implemented
 
+- Focused overview with one live demo, three next steps, optional package details, grouped navigation, and a collapsible mobile menu.
 - Next.js application consuming published Engine 2.1.0 and React Achievements 6.0.0 releases.
 - Builder-based definitions across the landing demo, playground, course, copied code, and independent minimal React example.
 - Automatic first-visit React Joyride 3.2.0 tours for playground discovery and starter setup, including a real preview unlock, remembered completion/dismissal, and manual replay.
@@ -29,6 +30,8 @@ Date: 2026-10-28. This file distinguishes implemented behavior from provider set
 The Starfall and visible-celebrations update adds simulation and SDK award tests plus desktop/mobile checks for real confetti, notifications, complete collections, keyboard focus, paused gameplay, fresh runs, and expired-sign-in recovery. All twenty-one unit scenarios, forty-four desktop/mobile browser scenarios, type checking, formatting, all three generated builder-example builds, and the production build passed locally. The full simulation can defeat all twenty-one scouts and unlock all five real SDK achievements. Desktop/mobile product screenshots were refreshed and inspected; hosted and deployment results are recorded on the delivery pull request.
 
 The first database run exposed doubly serialized JSON state. The adapter now sends serialized state as text before the JSONB cast; the rollback, retry, and concurrency scenarios pass with the real SDK.
+
+The overview simplification passed ten focused desktop/mobile browser scenarios, including grouped navigation, route changes, same-page menu dismissal, Escape focus restoration, responsive resizing, keyboard-operated package details, accessibility, real unlock celebrations, and refreshed screenshots. Type checking and the production build also passed. Full hosted checks and deployment results are recorded on the delivery pull request.
 
 ## Production evidence
 
