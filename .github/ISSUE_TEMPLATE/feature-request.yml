@@ -1,0 +1,23 @@
+name: Feature request
+description: Propose an improvement to the starter, playground, or onboarding.
+title: "Proposal: "
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Developer problem
+      description: Who needs this, and what are they unable to do today?
+    validations:
+      required: true
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Proposed outcome
+      description: Describe the user-visible result and how we could verify it.
+    validations:
+      required: true
+  - type: textarea
+    id: boundaries
+    attributes:
+      label: Scope and alternatives
+      description: Identify relevant roadmap work, alternatives, and whether an SDK change is needed.
