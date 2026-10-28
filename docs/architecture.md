@@ -1,14 +1,14 @@
 # Architecture
 
-Status: planned; application code is not implemented yet. Last updated: 2026-10-28.
+Status: implemented; provider verification and beta outcomes remain pending. Last updated: 2026-10-28.
 
 ## Ownership
 
 The engine owns rule evaluation, achievement state, and persistence interfaces. The React package adapts that state into hooks and UI. This app owns lesson content, authenticated commands, database access, the playground, and deployment.
 
-Consume published packages through public exports. Verify and pin an Engine 2.x / React 5.x pair during the first milestone. Keep database-specific integration in this application for v1.
+Consume published packages through public exports. The verified pair is Engine 2.0.2 / React 5.0.2. Keep database-specific integration in this application for v1.
 
-## Proposed application structure
+## Application structure
 
 ```text
 app/
@@ -56,13 +56,13 @@ Keep database credentials and privileged client code server-only. Scope reads an
 
 Start with three application-owned tables:
 
-| Table | Purpose and invariants |
-| --- | --- |
-| Learner progress | One durable row per authenticated user, used as the database lock target. |
-| Lesson completions | User ID, known lesson ID, and completion time; unique on `(user_id, lesson_id)`. |
-| Achievement state | Engine-compatible state for one subject, plus a serialization/schema version for future migrations. |
+| Table              | Purpose and invariants                                                                              |
+| ------------------ | --------------------------------------------------------------------------------------------------- |
+| Learner progress   | One durable row per authenticated user, used as the database lock target.                           |
+| Lesson completions | User ID, known lesson ID, and completion time; unique on `(user_id, lesson_id)`.                    |
+| Achievement state  | Engine-compatible state for one subject, plus a serialization/schema version for future migrations. |
 
-Choose names and exact serialization during implementation. Establish a single lock ordering for every command that changes a user's progress. A new learner row must be inserted safely before taking its row lock.
+The tables are `learners`, `lesson_completions`, and `achievement_states`; optional aggregate site counts use `daily_events`. Establish a single lock ordering for every command that changes a user's progress. A new learner row must be inserted safely before taking its row lock.
 
 ### Completion command
 
@@ -87,6 +87,12 @@ Do not expose generic client-supplied `/track`, `/increment`, or `/reset` operat
 
 Serialize learning mutations in the UI for v1, reconcile from the returned snapshot, and refresh on reload or focus. Retry displays must distinguish committed progress from network uncertainty. A retry can return no new unlocks after an earlier request already committed; persisted achievement state must still show the unlock. This release does not promise exactly-once notification delivery or realtime cross-tab updates.
 
+## Builder definitions and guided onboarding
+
+All demonstrated rule definitions use the published `AchievementBuilder` API. Numeric presets use `create().withMetric().withCondition().withAward().build()`; boolean milestones use `createBooleanAchievement().withAward().toConfig()`. Course milestones use distinct derived boolean metrics so combining builders cannot overwrite custom conditions under one metric key.
+
+The app uses React Joyride 3.2.0 for optional, on-demand playground and setup tours. Targets use explicit `data-tour` attributes. A tour button calls the real preview tracking function to demonstrate an unlock. Tour state is separate from preview resets and saved account progress. Skip, close, Escape, and replay are supported; scroll animation is disabled and focus trapping remains enabled. Tours are application UI, not an SDK requirement.
+
 ## Playground and code export
 
 Use a bounded configuration model: numeric thresholds, boolean milestones, text labels, an icon allowlist, and supported theme choices. Never evaluate arbitrary pasted JavaScript. Escape exported string values and serialize from one configuration source so preview and generated code stay aligned.
@@ -105,15 +111,15 @@ Release SDK changes only for demonstrated integration gaps: fix and release the 
 
 ## Verification
 
-| Boundary | Required evidence |
-| --- | --- |
-| Published package integration | Clean install, type-check, build, and real unlock using the pinned versions. |
-| Auth and access | Anonymous mutation denied; two users isolated; direct database access policies exercised. |
-| Transactions | Duplicate lesson, concurrent different lessons, and cross-instance behavior preserve correct state. |
-| Rollback and retry | Forced achievement-save failure rolls back completion; retry after a lost response remains idempotent. |
-| UI | Loading, failure, retry, keyboard navigation, and reduced-motion behavior on the core journeys. |
-| Code export | Generated examples for each preset compile and unlock through the public SDK APIs. |
-| Setup | A fresh developer follows the published minimal and full-app instructions. |
+| Boundary                      | Required evidence                                                                                      |
+| ----------------------------- | ------------------------------------------------------------------------------------------------------ |
+| Published package integration | Clean install, type-check, build, and real unlock using the pinned versions.                           |
+| Auth and access               | Anonymous mutation denied; two users isolated; direct database access policies exercised.              |
+| Transactions                  | Duplicate lesson, concurrent different lessons, and cross-instance behavior preserve correct state.    |
+| Rollback and retry            | Forced achievement-save failure rolls back completion; retry after a lost response remains idempotent. |
+| UI                            | Loading, failure, retry, keyboard navigation, and reduced-motion behavior on the core journeys.        |
+| Code export                   | Generated examples for each preset compile and unlock through the public SDK APIs.                     |
+| Setup                         | A fresh developer follows the published minimal and full-app instructions.                             |
 
 Use real Postgres for transactional scenarios; mocks cannot establish database locking or rollback behavior. Keep screenshots, demo links, and claims aligned with the verified release.
 

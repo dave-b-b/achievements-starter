@@ -4,7 +4,7 @@ Thanks for helping make achievement integrations easier to understand and reuse.
 
 ## Current status
 
-This is a planning repository. There is no runnable application or application test suite yet. The first implementation milestone will add the supported runtime, package scripts, environment variable template, database setup, and verification commands.
+The application and automated verification suites are implemented. Use the [setup guide](docs/setup.md) for runtime, database, browser, and verification commands. Provider setup and the external developer beta remain separate checks in [verification status](docs/verification.md).
 
 Start with the [product plan](docs/product-plan.md), [architecture](docs/architecture.md), and [roadmap](docs/roadmap.md). Select an issue whose dependencies are complete, and discuss material scope or architecture changes on that issue before implementing them.
 

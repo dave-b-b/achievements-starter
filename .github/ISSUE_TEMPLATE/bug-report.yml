@@ -1,6 +1,6 @@
 name: Bug report
 description: Report a reproducible application, example, or documentation problem.
-title: "Bug: "
+title: 'Bug: '
 body:
   - type: textarea
     id: problem

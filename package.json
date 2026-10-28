@@ -1,0 +1,47 @@
+{
+  "name": "achievements-starter",
+  "version": "0.1.0",
+  "private": true,
+  "description": "LearnQuest: a real achievement playground and authenticated learning starter",
+  "scripts": {
+    "dev": "next dev --hostname 127.0.0.1 --port 3417",
+    "build": "next build",
+    "start": "next start --hostname 127.0.0.1 --port 3417",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:db": "vitest run --config vitest.database.config.ts",
+    "test:e2e": "playwright test",
+    "db:migrate": "node --env-file-if-exists=.env.local scripts/migrate.mjs",
+    "check": "npm run typecheck && npm test && npm run build",
+    "verify:examples": "node scripts/verify-examples.mjs",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "engines": {
+    "node": ">=22.12.0 <25"
+  },
+  "dependencies": {
+    "@supabase/ssr": "0.12.7",
+    "@supabase/supabase-js": "2.118.0",
+    "achievements-engine": "2.0.2",
+    "lucide-react": "1.63.0",
+    "next": "16.4.3",
+    "postgres": "3.4.9",
+    "react": "19.3.1",
+    "react-achievements": "5.0.2",
+    "react-dom": "19.3.1",
+    "react-joyride": "3.2.0",
+    "server-only": "0.0.1"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.14.0",
+    "@playwright/test": "1.64.1",
+    "@types/node": "26.6.5",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "prettier": "3.9.10",
+    "typescript": "6.0.3",
+    "vitest": "5.0.5"
+  },
+  "type": "module"
+}
