@@ -128,8 +128,10 @@ test('automatic playground tour demonstrates a real unlock, remembers completion
   ).toEqual([]);
   await dialog.getByRole('button', { name: /Next/ }).click();
   await expect(dialog).toContainText('Give it your personality');
+  await expect(page.getByTestId('floater')).toHaveCSS('opacity', '1');
   await dialog.getByRole('button', { name: /Next/ }).click();
   await expect(dialog).toContainText('Take the working code with you');
+  await expect(page.getByTestId('floater')).toHaveCSS('opacity', '1');
   await dialog.getByRole('button', { name: 'Got it', exact: true }).click();
   await expect(page.getByRole('alertdialog')).toHaveCount(0);
   await page.reload();

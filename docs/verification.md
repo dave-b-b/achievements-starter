@@ -20,6 +20,7 @@ Date: 2026-10-28. This file distinguishes implemented behavior from provider set
 - Export verification type-checks and production-builds all three generated presets in the independent minimal project.
 - Twenty-eight desktop and mobile browser scenarios passed, covering public journeys, accessibility rules, keyboard-scrollable code, horizontal overflow, screenshot capture, guided-tour completion/skip/replay, Escape dismissal, and tour-driven real unlocks.
 - The automatic first-visit update passed fourteen focused desktop/mobile scenarios: initial start, completion and dismissal remembered across reloads, manual replay, separate setup/playground preferences, blocked storage, live preview actions, and accessibility on both guided pages.
+- The first real-account check exposed an authenticated-render failure: the client-backed provider was also given local achievement definitions. The learning page now uses only its server client; server-side rendering tests exercise both signed-in and guest branches against the published React SDK. All fourteen unit scenarios pass.
 
 The first database run exposed doubly serialized JSON state. The adapter now sends serialized state as text before the JSONB cast; the rollback, retry, and concurrency scenarios pass with the real SDK.
 
