@@ -275,7 +275,7 @@ export function Playground() {
         <div className="code-toolbar">
           <div>
             <span className="code-dot" />
-            App.tsx <span className="code-version">React 5.0.2 · Engine 2.0.2</span>
+            App.tsx <span className="code-version">React 6.0.0 · Engine 2.1.0</span>
           </div>
           <div className="button-row">
             <button onClick={download} aria-label="Download App.tsx">

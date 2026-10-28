@@ -18,7 +18,7 @@ export default function Page() {
           <h2>Just the achievements</h2>
           <p>A tiny React example. No database, no account, and no backend setup.</p>
           <pre tabIndex={0}>
-            <code>npm install react-achievements@5.0.2 achievements-engine@2.0.2</code>
+            <code>npm install react-achievements@6.0.0 achievements-engine@2.1.0</code>
           </pre>
           <p>Copy the complete App.tsx from the playground, or open the minimal example.</p>
           <a

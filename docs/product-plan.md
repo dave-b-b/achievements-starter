@@ -97,6 +97,6 @@ Launch material includes a live demo, a 60–90 second walkthrough, and a short 
 ## Assumptions to validate during implementation
 
 - Next.js, Supabase, and Vercel remain a practical fit after the integration spike.
-- Current published Engine 2.x and React 5.x releases provide the required public APIs; verify exact versions and compatibility before pinning.
+- Published Engine 2.1.0 and React Achievements 6.0.0 provide the required public APIs and are pinned in the app and minimal example; verify compatibility when changing either pin.
 - A single Node-runtime application can own both lesson completion and achievement persistence in the same Postgres transaction.
 - Accounts, OAuth credentials, production URLs, and hosting configuration will be supplied through the appropriate provider settings; none are required to read this planning repository.

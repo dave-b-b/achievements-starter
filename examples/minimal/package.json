@@ -8,9 +8,9 @@
     "build": "tsc --noEmit && vite build"
   },
   "dependencies": {
-    "achievements-engine": "2.0.2",
+    "achievements-engine": "2.1.0",
     "react": "19.3.1",
-    "react-achievements": "5.0.2",
+    "react-achievements": "6.0.0",
     "react-dom": "19.3.1"
   },
   "devDependencies": {
