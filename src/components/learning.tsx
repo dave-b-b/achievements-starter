@@ -15,7 +15,6 @@ import {
 } from 'lucide-react';
 import { lessons } from '../course/lessons';
 import { createLearningClient } from '../achievements/client';
-import { courseAchievements } from '../achievements/course';
 import { AchievementBoard } from './achievement-board';
 
 type LearningProps = { userId: string | null; configured: boolean; authFailed: boolean };
@@ -26,7 +25,6 @@ export function Learning(props: LearningProps) {
     <AchievementProvider
       key={props.userId}
       client={client}
-      achievements={courseAchievements}
       ui={{ enableConfetti: false, enableNotifications: false }}
     >
       <SavedCourse {...props} />

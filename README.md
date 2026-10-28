@@ -2,7 +2,7 @@
 
 A Next.js reference application and interactive playground for [achievements-engine](https://github.com/dave-b-b/achievements-engine) and [react-achievements](https://github.com/dave-b-b/react-achievements).
 
-**[Try the live demo](https://achievements-starter.vercel.app)** — deployed on Vercel Hobby. The public demo, builder playground, lessons, and guided tours work without accounts. Production sign-in and saved progress are not configured yet; see [verification status](docs/verification.md).
+**[Try the live demo](https://achievements-starter.vercel.app)** — deployed on Vercel Hobby. The public demo, builder playground, lessons, and guided tours work without accounts. Production is configured for GitHub sign-in and saved progress; account-flow verification is in progress. See [verification status](docs/verification.md).
 
 ![LearnQuest overview](public/screenshots/overview-desktop.png)
 
