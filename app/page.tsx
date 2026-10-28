@@ -5,6 +5,7 @@ import {
   BookOpen,
   Code2,
   Layers,
+  Gamepad2,
   MousePointer2,
   Sparkles,
 } from 'lucide-react';
@@ -52,6 +53,21 @@ export default function Home() {
           <Code2 size={17} /> react-achievements <span>6.0.0</span>
         </a>
       </div>
+      <Link href="/arcade" className="arcade-promo">
+        <div className="arcade-promo-symbol" aria-hidden="true">
+          <Gamepad2 size={32} />
+        </div>
+        <div>
+          <span className="eyebrow">NOW PLAYING · STARFALL</span>
+          <h2>Real gameplay. Real achievements.</h2>
+          <p>
+            A space shooter with three waves, five badges, and a little confetti. No sign-in needed.
+          </p>
+        </div>
+        <span className="button button-light">
+          Play the arcade <ArrowRight size={17} />
+        </span>
+      </Link>
       <section className="journeys">
         <div className="section-line">
           <div>

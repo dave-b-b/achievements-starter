@@ -31,7 +31,10 @@ function Demo() {
 
 export default function App() {
   return (
-    <AchievementProvider achievements={achievements} ui={{ enableConfetti: false }}>
+    <AchievementProvider
+      achievements={achievements}
+      ui={{ enableConfetti: true, enableNotifications: true }}
+    >
       <Demo />
     </AchievementProvider>
   );

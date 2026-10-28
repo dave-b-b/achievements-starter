@@ -1,7 +1,13 @@
 'use client';
-import { AchievementsWidget, useSimpleAchievements } from 'react-achievements';
-import { Check, LockKeyhole } from 'lucide-react';
-export function AchievementBoard({ compact = false }: { compact?: boolean }) {
+import { useSimpleAchievements } from 'react-achievements';
+import { AchievementCard, AchievementCollection } from './achievement-collection';
+export function AchievementBoard({
+  compact = false,
+  onOpenCollection,
+}: {
+  compact?: boolean;
+  onOpenCollection?: () => void;
+}) {
   const { allAchievements, unlockedCount, totalCount, isLoading } = useSimpleAchievements();
   return (
     <div className={compact ? 'achievement-board compact' : 'achievement-board'}>
@@ -12,30 +18,12 @@ export function AchievementBoard({ compact = false }: { compact?: boolean }) {
         </span>
       </div>
       <div className="badge-grid">
-        {allAchievements.map((achievement, index) => (
-          <div
-            className={`badge-card ${achievement.isUnlocked ? 'earned' : ''}`}
-            key={achievement.achievementId}
-          >
-            <div className={`medal medal-${index % 3}`} aria-hidden="true">
-              {achievement.achievementIconKey || '✦'}
-              <span className="medal-dot">
-                {achievement.isUnlocked ? <Check size={10} /> : <LockKeyhole size={9} />}
-              </span>
-            </div>
-            <strong>{achievement.achievementTitle}</strong>
-            <span>{achievement.achievementDescription}</span>
-            <small>{achievement.isUnlocked ? 'Unlocked' : 'In progress'}</small>
-          </div>
+        {allAchievements.map((achievement) => (
+          <AchievementCard key={achievement.achievementId} achievement={achievement} />
         ))}
       </div>
       <div className="widget-row">
-        <AchievementsWidget
-          placement="inline"
-          theme="minimal"
-          label="View achievements"
-          density="compact"
-        />
+        <AchievementCollection onOpen={onOpenCollection} />
       </div>
     </div>
   );

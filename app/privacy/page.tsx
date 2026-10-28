@@ -10,8 +10,9 @@ export default function Page() {
       <article className="panel prose">
         <h2>Exploring without an account</h2>
         <p>
-          The playground runs in browser memory. Its configurations and progress are not saved to
-          your course account. Reloading or resetting starts the preview again.
+          The playground and Starfall arcade run in browser memory. Its configurations and progress
+          are not saved to your course account. Reloading or resetting starts the preview or game
+          again. Starfall scores and achievements are not uploaded to the learning database.
         </p>
         <p>
           Your browser also remembers whether you finished or dismissed each guided tour, so it does

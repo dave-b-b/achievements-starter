@@ -1,12 +1,7 @@
 'use client';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
-import {
-  AchievementProvider,
-  AchievementsWidget,
-  StorageType,
-  useSimpleAchievements,
-} from 'react-achievements';
+import { AchievementProvider, StorageType, useSimpleAchievements } from 'react-achievements';
 import {
   ArrowRight,
   Check,
@@ -29,6 +24,8 @@ import {
 } from '../playground/config';
 import { measure } from '../measure';
 import { GuidedTour } from './guided-tour';
+import { AchievementBoard } from './achievement-board';
+import { celebrationUI } from './celebrations';
 function Preview({
   config,
   onTryReady,
@@ -102,7 +99,6 @@ function Preview({
           ? 'A small win worth celebrating. Nicely done!'
           : `${target - current} ${preset.boolean ? 'step' : preset.unit} to your next small win.`}
       </p>
-      <AchievementsWidget placement="inline" theme={config.theme} label="View achievement" />
     </div>
   );
 }
@@ -265,9 +261,10 @@ export function Playground() {
               title: config.title.trim() ? config.title : presets[config.preset].title,
             })}
             storage={StorageType.Memory}
-            ui={{ enableConfetti: false, enableNotifications: false }}
+            ui={{ ...celebrationUI, theme: config.theme }}
           >
             <Preview config={config} onTryReady={registerPreview} />
+            <AchievementBoard compact />
           </AchievementProvider>
         </section>
       </div>

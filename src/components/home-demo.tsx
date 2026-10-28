@@ -1,8 +1,10 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { AchievementBuilder } from 'achievements-engine';
 import { AchievementProvider, useSimpleAchievements, StorageType } from 'react-achievements';
 import { ArrowRight, Check, RotateCcw } from 'lucide-react';
+import { AchievementCollection } from './achievement-collection';
+import { celebrationUI } from './celebrations';
 const achievements = AchievementBuilder.combine([
   AchievementBuilder.createScoreAchievement(1).withAward({
     title: 'A little momentum',
@@ -16,6 +18,9 @@ const achievements = AchievementBuilder.combine([
   }),
 ]);
 function Preview() {
+  const [ready, setReady] = useState(false);
+  // Keep the first click behind hydration so SDK unlock listeners are attached.
+  useEffect(() => setReady(true), []);
   const { increment, unlockedCount, metrics, nextAchievement } = useSimpleAchievements();
   const count = Number(metrics.score?.at(-1) || 0);
   return (
@@ -40,7 +45,7 @@ function Preview() {
       <progress value={Math.min(count, 3)} max={3} aria-label="Small wins" />
       <button
         className="button button-light"
-        disabled={count >= 3}
+        disabled={!ready || count >= 3}
         onClick={() => increment('score')}
       >
         {count >= 3 ? (
@@ -57,6 +62,8 @@ function Preview() {
         {unlockedCount} of 2 achievements unlocked
         {nextAchievement ? ` · Next: ${nextAchievement.achievementTitle}` : ' · You did it!'}
       </div>
+      <AchievementCollection theme="modern" />
+      <div className="demo-features">Progress · badges · unlock notifications · confetti</div>
     </>
   );
 }
@@ -75,7 +82,7 @@ export function HomeDemo() {
         key={revision}
         achievements={achievements}
         storage={StorageType.Memory}
-        ui={{ enableConfetti: false, enableNotifications: false }}
+        ui={celebrationUI}
       >
         <Preview />
       </AchievementProvider>

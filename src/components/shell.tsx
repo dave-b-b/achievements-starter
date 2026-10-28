@@ -1,24 +1,34 @@
 'use client';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useEffect, useState } from 'react';
 import {
   ArrowUpRight,
   BookOpen,
   Boxes,
   Code2,
+  Gamepad2,
   GitFork as Github,
   Sparkles,
   Terminal,
+  X,
 } from 'lucide-react';
 const links = [
   { href: '/', label: 'Overview', icon: Boxes },
   { href: '/learn', label: 'Learn by doing', icon: BookOpen },
   { href: '/playground', label: 'Playground', icon: Sparkles },
+  { href: '/arcade', label: 'Play Starfall', icon: Gamepad2 },
   { href: '/setup', label: 'Use the starter', icon: Terminal },
   { href: '/architecture', label: 'Under the hood', icon: Code2 },
 ];
 export function Shell({ children }: { children: React.ReactNode }) {
   const path = usePathname();
+  const [expiredSignIn, setExpiredSignIn] = useState(false);
+  useEffect(() => {
+    setExpiredSignIn(
+      new URLSearchParams(window.location.search).get('error_code') === 'bad_oauth_state',
+    );
+  }, [path]);
   return (
     <div className="app-shell">
       <a className="skip-link" href="#main">
@@ -73,6 +83,20 @@ export function Shell({ children }: { children: React.ReactNode }) {
           </a>
         </header>
         <main id="main" tabIndex={-1}>
+          {expiredSignIn && (
+            <div className="expired-sign-in" role="alert">
+              <p>
+                Your sign-in link expired. Open the course to sign in again and load your saved
+                progress. The playground and arcade work without an account.
+              </p>
+              <Link href="/learn#account">
+                Open course <ArrowUpRight size={14} />
+              </Link>
+              <button onClick={() => setExpiredSignIn(false)} aria-label="Dismiss sign-in message">
+                <X size={17} />
+              </button>
+            </div>
+          )}
           {children}
         </main>
         <footer className="footer">
