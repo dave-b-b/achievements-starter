@@ -14,6 +14,7 @@ Consume published packages through public exports. The pinned pair is Engine 2.1
 app/
   learn/                    Public lesson pages and authenticated progress UI
   playground/               Guest configuration editor and preview
+  arcade/                   Public Starfall space shooter
   api/                      Authenticated progress and completion routes
   auth/                     OAuth callback and session handling
 src/
@@ -21,6 +22,7 @@ src/
   course/                   Fixed lesson definitions and validation
   server/                   Server-only auth, database access, and service wiring
   playground/               Presets, safe configuration model, and code export
+  game/                     Bounded simulation, collisions, drawing, and builder definitions
 supabase/migrations/        Schema, constraints, and access policies
 tests/                      Focused database and browser scenarios
 examples/minimal/           Browser-runnable local integration
@@ -100,6 +102,12 @@ Use a bounded configuration model: numeric thresholds, boolean milestones, text 
 Use the actual local engine and React components. Recreate preview state explicitly when definitions change. The existing provider initializes its engine once, so changing definition props alone is insufficient; key the provider by configuration revision and reset preview state predictably.
 
 Preset changes and reset affect only the guest preview. Exports must include imports, definitions, provider setup, an action, and visible feedback. Offer both a minimal runnable example and the full authenticated starter.
+
+## Starfall and celebration UI
+
+Starfall is a local arcade example, independent of authenticated course progress. Its bounded animation steps own movement, projectile collisions, shield damage, wave transitions, and scoring. React forwards resulting score, combo, wave, and victory events through the SDK public API; builder definitions own award thresholds. The SDK owns achievement evaluation, snapshots, unlock dispatch, and real canvas confetti. A fresh memory-backed provider scopes each run. Backgrounding the game or opening its achievement collection pauses it. Keyboard and pointer/touch controls share the same simulation.
+
+The app enables confetti and notifications in its home, playground, course, arcade, and exported examples. It supplies a styled notification through the public `NotificationComponent` extension and a native dialog through `ModalComponent`. The collection uses SDK `AchievementsWidget` and `AchievementsList`, shows locked and earned awards, reads numeric progress from engine snapshots, traps keyboard focus, and restores the trigger on close. The SDK confetti implementation respects reduced motion. Expired OAuth state is explained with a safe course retry link; public demos remain available.
 
 ## Deployment and dependency policy
 

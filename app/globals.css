@@ -1322,11 +1322,492 @@ progress::-moz-progress-bar {
   color: #5c7e47;
 }
 .badge-card.earned small {
-  color: #68814f;
+  color: #456035;
 }
 .widget-row {
   margin-top: 18px;
   text-align: center;
+}
+.collection-button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 13px 14px;
+  background: #f1ecf8;
+  color: #5a3c8d;
+  border: 1px solid #dcd0ed;
+  border-radius: 9px;
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+  text-align: left;
+}
+.collection-button > span {
+  flex: 1;
+}
+.achievement-dialog {
+  color: #362b40;
+  background: #fdfcfe;
+  width: min(640px, calc(100vw - 32px));
+  max-width: none;
+  max-height: min(80vh, 760px);
+  overflow: auto;
+  padding: 26px;
+  border: 1px solid #dcd0ed;
+  border-radius: 18px;
+  box-shadow: 0 24px 80px #20132940;
+  text-align: left;
+}
+.achievement-dialog::backdrop {
+  background: #20132999;
+  backdrop-filter: blur(4px);
+}
+.achievement-dialog h2 {
+  font-size: 25px;
+  color: #362b40;
+  margin: 6px 0 0;
+}
+.achievement-dialog .collection-description {
+  color: #6d6076;
+  font-size: 12px;
+  line-height: 1.7;
+  margin: 16px 0 20px;
+}
+.collection-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 38px;
+  height: 38px;
+  border: 1px solid #dcd0ed;
+  border-radius: 50%;
+  background: #f1ecf8;
+  color: #5a3c8d;
+  cursor: pointer;
+}
+.collection-button strong {
+  font-size: 11px;
+  white-space: nowrap;
+}
+.home-demo > .collection-button {
+  margin-top: 18px;
+  background: #ffffff12;
+  border-color: #cbbbdc70;
+  color: #fff;
+}
+.demo-features {
+  color: #d8cce9;
+  font-size: 9px;
+  margin-top: 12px;
+  line-height: 1.7;
+}
+.preview-panel > .achievement-board {
+  margin-top: 20px;
+}
+.badge-progress {
+  width: 100%;
+  grid-column: 2;
+  margin-top: 8px;
+}
+.badge-progress progress {
+  margin: 0 0 4px;
+  height: 5px;
+}
+.badge-progress > span {
+  font-size: 10px;
+  color: #6d6076;
+}
+.achievement-notice {
+  position: fixed;
+  z-index: 2500;
+  right: 16px;
+  width: min(350px, calc(100vw - 32px));
+  display: grid;
+  grid-template-columns: 40px 1fr 24px;
+  gap: 12px;
+  align-items: center;
+  padding: 16px;
+  border: 1px solid #cbbbdc;
+  border-radius: 14px;
+  background: #362b40;
+  color: #fff;
+  box-shadow: 0 12px 40px #20132933;
+  text-align: left;
+}
+.notice-icon {
+  font-size: 30px;
+  color: #f3cf80;
+}
+.notice-eyebrow {
+  display: block;
+  color: #e0c4ff;
+  font-size: 10px;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.achievement-notice strong {
+  display: block;
+  font-size: 14px;
+  line-height: 1.4;
+}
+.achievement-notice p {
+  font-size: 11px;
+  color: #e7dcef;
+  margin: 3px 0 0;
+  line-height: 1.5;
+}
+.achievement-notice button {
+  display: flex;
+  padding: 3px;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+.notice-minimal {
+  background: #fff;
+  color: #362b40;
+}
+.notice-minimal .notice-eyebrow {
+  color: #7051bd;
+}
+.notice-minimal p {
+  color: #6d6076;
+}
+.notice-minimal .notice-icon {
+  color: #7051bd;
+}
+.notice-gamified {
+  background: #0f172a;
+  border-color: #517888;
+}
+.notice-gamified .notice-eyebrow {
+  color: #fda66d;
+}
+.notice-gamified .notice-icon {
+  color: #67e8f9;
+}
+.arcade-promo {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 28px;
+  margin: 0 0 42px;
+  border: 1px solid #4a3b5c;
+  border-radius: 16px;
+  background: linear-gradient(115deg, #30273f, #15192c);
+  color: #fff;
+}
+.arcade-promo-symbol {
+  width: 68px;
+  height: 68px;
+  border: 1px solid #a78bfa50;
+  border-radius: 19px;
+  display: grid;
+  place-items: center;
+  color: #cfbaf6;
+  background: #a78bfa10;
+  flex-shrink: 0;
+}
+.arcade-promo > div:nth-child(2) {
+  flex: 1;
+}
+.arcade-promo .eyebrow {
+  color: #d2b7f6;
+}
+.arcade-promo h2 {
+  color: #fff;
+  font-size: 23px;
+  margin: 9px 0;
+  letter-spacing: -0.5px;
+}
+.arcade-promo p {
+  font-size: 12px;
+  line-height: 1.8;
+  color: #d0c5dc;
+  margin: 0;
+}
+.arcade-promo .button {
+  white-space: nowrap;
+}
+.arcade-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  gap: 26px;
+  align-items: start;
+}
+.arcade-machine {
+  scroll-margin-top: 16px;
+  min-width: 0;
+  border: 1px solid #4b405d;
+  border-radius: 17px;
+  overflow: hidden;
+  background: #121326;
+  box-shadow: 0 16px 48px #30273f18;
+}
+.arcade-hud {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  padding: 18px 20px;
+  gap: 10px;
+  background: #211e33;
+  border-bottom: 1px solid #4b405d;
+  color: #fff;
+}
+.arcade-hud dl {
+  margin: 0;
+}
+.arcade-hud dt {
+  color: #c5b7d6;
+  font-size: 9px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 7px;
+}
+.arcade-hud dd {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 20px;
+  font-weight: 600;
+}
+.arcade-hud dd > span {
+  font-size: 12px;
+  color: #d0c0e7;
+}
+.arcade-hud dd > [data-testid='arcade-shields'] {
+  font-size: 20px;
+  color: #fff;
+}
+.arcade-stage {
+  position: relative;
+}
+.arcade-stage canvas {
+  display: block;
+  width: min(100%, calc(62svh * 9 / 8));
+  height: auto;
+  margin-inline: auto;
+  touch-action: none;
+}
+.arcade-stage canvas:focus-visible {
+  outline: 3px solid #dac5ff;
+  outline-offset: -4px;
+}
+.arcade-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(#12132660, #121326e6);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 28px;
+  gap: 16px;
+}
+.arcade-emblem {
+  font-size: 55px;
+  color: #e1c88c;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.arcade-kicker {
+  color: #c9b3ed;
+  font-size: 9px;
+  letter-spacing: 1.4px;
+}
+.arcade-overlay h2 {
+  font-size: clamp(23px, 3vw, 34px);
+  max-width: 350px;
+  line-height: 1.2;
+  letter-spacing: -0.8px;
+  margin: 0;
+}
+.arcade-overlay p {
+  color: #d3c8df;
+  font-size: 12px;
+  line-height: 1.8;
+  max-width: 330px;
+  margin: 0;
+}
+.arcade-overlay .button {
+  margin-top: 10px;
+}
+.arcade-overlay small {
+  color: #c3b3d7;
+  font-size: 10px;
+}
+.arcade-toolbar {
+  padding: 14px 18px;
+  background: #211e33;
+  color: #e3d8f0;
+}
+.arcade-toolbar p {
+  color: inherit;
+  font-size: 10px;
+  line-height: 1.7;
+  margin: 0 0 10px;
+}
+.arcade-toolbar > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+.arcade-toolbar .text-button {
+  color: #e3d8f0;
+}
+.arcade-toolbar button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+.arcade-mission-note h2 {
+  font-size: 22px;
+  letter-spacing: -0.5px;
+  margin: 12px 0;
+}
+.arcade-mission-note p,
+.arcade-local-note {
+  font-size: 12px;
+  color: #6d6076;
+  line-height: 1.9;
+}
+.arcade-sidebar .achievement-board {
+  margin-top: 20px;
+  padding: 18px;
+}
+.arcade-sidebar .badge-card {
+  padding: 11px;
+}
+.arcade-local-note {
+  margin: 18px 0 12px;
+  font-size: 10px;
+}
+.arcade-sidebar > .text-button {
+  font-size: 11px;
+  line-height: 1.7;
+}
+@media (max-width: 1100px) {
+  .arcade-grid {
+    grid-template-columns: minmax(0, 1fr) 250px;
+    gap: 18px;
+  }
+  .arcade-promo {
+    flex-wrap: wrap;
+  }
+  .arcade-promo > .button {
+    margin-left: 92px;
+  }
+}
+@media (max-width: 800px) {
+  .arcade-grid {
+    grid-template-columns: 1fr;
+  }
+  .arcade-stage {
+    width: 100%;
+  }
+  .arcade-stage canvas {
+    height: auto;
+  }
+  .arcade-sidebar .badge-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .arcade-promo {
+    gap: 18px;
+    padding: 22px;
+  }
+  .arcade-promo-symbol {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+  }
+  .arcade-promo h2 {
+    font-size: 20px;
+  }
+  .arcade-promo > .button {
+    margin-left: 0;
+  }
+}
+.expired-sign-in {
+  margin: 24px 46px 0;
+  padding: 16px 18px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  border: 1px solid #dfd0b1;
+  border-radius: 10px;
+  background: #fbf4e6;
+  color: #5b4727;
+}
+.expired-sign-in p {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.7;
+  flex: 1;
+}
+.expired-sign-in a {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  font-size: 12px;
+  white-space: nowrap;
+  color: #5b4727;
+  text-decoration: underline;
+}
+.expired-sign-in button {
+  border: 0;
+  background: transparent;
+  color: inherit;
+  display: flex;
+  padding: 4px;
+  cursor: pointer;
+}
+@media (max-width: 600px) {
+  .expired-sign-in {
+    margin: 18px 22px 0;
+    flex-wrap: wrap;
+  }
+  .expired-sign-in p {
+    flex-basis: calc(100% - 42px);
+  }
+  .expired-sign-in a {
+    order: 2;
+  }
+}
+@media (max-width: 480px) {
+  .arcade-sidebar .badge-grid {
+    grid-template-columns: 1fr;
+  }
+  .arcade-hud {
+    padding: 14px;
+    gap: 6px;
+  }
+  .arcade-hud dd {
+    font-size: 18px;
+  }
+  .arcade-hud dd > span {
+    font-size: 10px;
+  }
+  .arcade-hud dd > svg {
+    width: 14px;
+  }
+  .arcade-overlay {
+    gap: 12px;
+    padding: 22px;
+  }
+  .arcade-emblem {
+    font-size: 38px;
+  }
+  .arcade-promo-symbol {
+    display: none;
+  }
+  .achievement-dialog {
+    padding: 20px;
+  }
 }
 .course-finished {
   padding-top: 20px;

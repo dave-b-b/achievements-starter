@@ -5,12 +5,12 @@ test('a real unlock works on the landing page', async ({ page }) => {
   page.on('pageerror', (error) => errors.push(error.message));
   await page.goto('/');
   await page.getByRole('button', { name: 'Make a little progress' }).click();
-  await expect(page.getByRole('status')).toContainText('1 of 2');
+  await expect(page.locator('.demo-status')).toContainText('1 of 2');
   await page.getByRole('button', { name: 'Make a little progress' }).click();
   await page.getByRole('button', { name: 'Make a little progress' }).click();
   await expect(page.getByRole('button', { name: 'All wins unlocked' })).toBeDisabled();
   await page.getByRole('button', { name: 'Reset live demo' }).click();
-  await expect(page.getByRole('status')).toContainText('0 of 2');
+  await expect(page.locator('.demo-status')).toContainText('0 of 2');
   expect(errors).toEqual([]);
 });
 test('playground presets, customization, and reset use actual SDK state', async ({ page }) => {
@@ -77,7 +77,7 @@ test('cross-origin mutations are denied and unsupported commands are absent', as
   ).toBe(404);
   expect((await request.get('/api/progress')).headers()['cache-control']).toContain('no-store');
 });
-for (const path of ['/', '/playground', '/learn', '/setup', '/architecture', '/privacy'])
+for (const path of ['/', '/playground', '/learn', '/arcade', '/setup', '/architecture', '/privacy'])
   test(`accessible page ${path}`, async ({ page }) => {
     await page.emulateMedia({ reducedMotion: 'reduce' });
     await page.goto(path);

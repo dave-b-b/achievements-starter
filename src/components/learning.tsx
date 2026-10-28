@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
-import { AchievementProvider, useSimpleAchievements } from 'react-achievements';
+import { AchievementProvider, StorageType, useSimpleAchievements } from 'react-achievements';
 import {
   ArrowRight,
   BookOpen,
@@ -14,19 +14,28 @@ import {
   RefreshCw,
 } from 'lucide-react';
 import { lessons } from '../course/lessons';
+import { courseAchievements } from '../achievements/course';
 import { createLearningClient } from '../achievements/client';
 import { AchievementBoard } from './achievement-board';
+import { celebrationUI } from './celebrations';
 
 type LearningProps = { userId: string | null; configured: boolean; authFailed: boolean };
 export function Learning(props: LearningProps) {
   const [client] = useState(createLearningClient);
-  if (!props.userId) return <Course {...props} />;
+  if (!props.userId)
+    return (
+      <AchievementProvider
+        achievements={courseAchievements}
+        storage={StorageType.Memory}
+        ui={celebrationUI}
+      >
+        <Course {...props}>
+          <AchievementBoard compact />
+        </Course>
+      </AchievementProvider>
+    );
   return (
-    <AchievementProvider
-      key={props.userId}
-      client={client}
-      ui={{ enableConfetti: false, enableNotifications: false }}
-    >
+    <AchievementProvider key={props.userId} client={client} ui={celebrationUI}>
       <SavedCourse {...props} />
     </AchievementProvider>
   );
