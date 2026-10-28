@@ -2,7 +2,7 @@
 
 A Next.js reference application and interactive playground for [achievements-engine](https://github.com/dave-b-b/achievements-engine) and [react-achievements](https://github.com/dave-b-b/react-achievements).
 
-**[Try the live demo](https://achievements-starter.vercel.app)** — deployed on Vercel Hobby. The public demo, builder playground, lessons, and guided tours work without accounts. Production is configured for GitHub sign-in and saved progress; account-flow verification is in progress. See [verification status](docs/verification.md).
+**[Try the live demo](https://achievements-starter.vercel.app)** — deployed on Vercel Hobby with Supabase Free. Explore the builder playground and lessons without an account, or sign in with GitHub to save course progress. Guided tours start automatically on your first visit. See [verification status](docs/verification.md).
 
 ![LearnQuest overview](public/screenshots/overview-desktop.png)
 
@@ -40,7 +40,7 @@ The starter consumes published SDK releases. It demonstrates authentication, dat
 
 ## Stack
 
-Next.js 16.4.3, React 19.3.1, TypeScript 6.0.3, Supabase Auth/Postgres, and Vercel Hobby. SDK versions are pinned at Engine 2.0.2 and React Achievements 5.0.2, with a committed lockfile.
+Next.js 16.4.3, React 19.3.1, TypeScript 6.0.3, Supabase Auth/Postgres, and Vercel Hobby. SDK versions are pinned at Engine 2.1.0 and React Achievements 6.0.0, with a committed lockfile.
 
 The server-backed journey is: **sign in → complete one lesson → save progress and achievement state together → reload and see the result preserved**.
 

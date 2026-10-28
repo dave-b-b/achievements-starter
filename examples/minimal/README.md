@@ -13,4 +13,4 @@ Complete three lessons using the button to unlock an achievement. Replace `src/A
 npm run build
 ```
 
-The example uses published React Achievements 5.0.2 and Engine 2.0.2 releases. For server-authoritative saved progress, use the full starter and its [setup guide](../../docs/setup.md).
+The example uses published React Achievements 6.0.0 and Engine 2.1.0 releases. For server-authoritative saved progress, use the full starter and its [setup guide](../../docs/setup.md).

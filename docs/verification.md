@@ -4,7 +4,7 @@ Date: 2026-10-28. This file distinguishes implemented behavior from provider set
 
 ## Implemented
 
-- Next.js application consuming published Engine 2.0.2 and React Achievements 5.0.2 releases.
+- Next.js application consuming published Engine 2.1.0 and React Achievements 6.0.0 releases.
 - Builder-based definitions across the landing demo, playground, course, copied code, and independent minimal React example.
 - Automatic first-visit React Joyride 3.2.0 tours for playground discovery and starter setup, including a real preview unlock, remembered completion/dismissal, and manual replay.
 - Safe three-preset playground, customization/reset, code export/download, and independent minimal React example.
@@ -22,6 +22,8 @@ Date: 2026-10-28. This file distinguishes implemented behavior from provider set
 - The automatic first-visit update passed fourteen focused desktop/mobile scenarios: initial start, completion and dismissal remembered across reloads, manual replay, separate setup/playground preferences, blocked storage, live preview actions, and accessibility on both guided pages.
 - The first real-account check exposed an authenticated-render failure: the client-backed provider was also given local achievement definitions. The learning page now uses only its server client; server-side rendering tests exercise both signed-in and guest branches against the published React SDK. All fourteen unit scenarios pass.
 
+- The app and independent minimal example now pin published Engine 2.1.0 and React Achievements 6.0.0. Both registry lockfiles match the published SHA-512 integrities, and clean locked installs passed for both projects. The upgrade passed fourteen unit scenarios, eight real Postgres scenarios, type checking, formatting, the production build, all three generated builder-example builds, and all thirty desktop/mobile browser scenarios. Repository screenshots were refreshed and inspected. Deployment verification for this dependency update is pending.
+
 The first database run exposed doubly serialized JSON state. The adapter now sends serialized state as text before the JSONB cast; the rollback, retry, and concurrency scenarios pass with the real SDK.
 
 ## Production evidence
@@ -32,17 +34,17 @@ The first database run exposed doubly serialized JSON state. The adapter now sen
 - Both committed migrations were applied to that project. The production login owns the four LearnQuest tables and has no schema CREATE permission. A real connection passed certificate-verified TLS, table access, and transactional rollback checks. Anonymous Data API requests were denied for all four tables. GitHub sign-in is enabled in the provider.
 - Twenty-six desktop and mobile scenarios passed against the public production URL: actual unlock/reset, all playground presets, generated builder code, public lessons, origin rejection, accessibility/overflow, optional tours, and keyboard dismissal. Screenshot-only scenarios were excluded from this production run.
 - GitHub verification passed on the implementation, including a fresh locked install, real Postgres scenarios, generated-example builds, production build, and desktop/mobile browser scenarios.
-- An isolated copy also passed unit checks and a production build with Engine 2.1.0 and React Achievements 6.0.0 package candidates. Those versions are not published dependencies of this app.
 - The automatic-tour and verified-TLS update was deployed from commit `c0b2e62` through [PR #14](https://github.com/dave-b-b/achievements-starter/pull/14). The production backend values, provider CA, site origin, and exact auth callback are configured; Preview deployments have no production backend values.
-- The deployed sign-in route returns a 303 to Supabase, then a 302 to GitHub with the generated client ID and correct Supabase callback. A successful account callback and saved lesson still require the real-account check below.
+- The deployed sign-in route returns a 303 to Supabase, then a 302 to GitHub with the generated client ID and correct Supabase callback. The subsequent real-account check is recorded below.
 - The updated production suite passed all twenty-eight desktop/mobile public scenarios, including automatic first-visit tours, remembered dismissal/completion, replay, and blocked storage. The first run caught the contrast scan during the tooltip's opacity transition; the check now waits for full opacity before scanning. The affected scenario also passed six repeated desktop/mobile runs.
+- The authenticated-provider fix was deployed from `ce570c7` through [PR #15](https://github.com/dave-b-b/achievements-starter/pull/15). The owner confirmed successful GitHub sign-in, lesson completion, and progress preserved after reload. An independent read-only database check confirmed one learner, one saved lesson completion, and one persisted achievement-state record. This verifies the first-lesson journey; all-three-lesson and account-switching provider checks remain below.
 
 ## Remaining external checks
 
-- Exercise actual GitHub OAuth, sign-out/account switching, provider session refresh, and persistence through the deployed app.
-- Verify the selected Supabase Data API denies anonymous and authenticated direct access to progress tables. Local SQL role coverage is not a substitute for this provider-level check.
+- Exercise all three milestones, sign-out/account switching, and provider session refresh through the deployed app. The first-lesson GitHub sign-in, completion, and reload journey is verified.
+- Verify authenticated direct Data API access to progress tables is denied. Anonymous direct requests are already denied in production; local authenticated SQL role coverage is not a substitute for this remaining provider-level check.
 - Complete a fresh-developer setup review and the 5–10 developer beta; no external integration or adoption gains are claimed.
-- Record the final walkthrough after the authenticated journey is verified.
+- Record the final walkthrough, including the verified authenticated first-lesson journey.
 
 ## Commands
 

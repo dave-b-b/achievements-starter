@@ -6,7 +6,7 @@ Status: implemented; provider verification and beta outcomes remain pending. Las
 
 The engine owns rule evaluation, achievement state, and persistence interfaces. The React package adapts that state into hooks and UI. This app owns lesson content, authenticated commands, database access, the playground, and deployment.
 
-Consume published packages through public exports. The verified pair is Engine 2.0.2 / React 5.0.2. Keep database-specific integration in this application for v1.
+Consume published packages through public exports. The pinned pair is Engine 2.1.0 / React Achievements 6.0.0. Keep database-specific integration in this application for v1.
 
 ## Application structure
 

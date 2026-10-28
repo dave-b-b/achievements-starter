@@ -45,11 +45,11 @@ export default function Home() {
       <div className="package-strip">
         <span>ONE EXPERIENCE. TWO SMALL PACKAGES.</span>
         <a href="https://www.npmjs.com/package/achievements-engine">
-          <Layers size={17} /> achievements-engine <span>2.0.2</span>
+          <Layers size={17} /> achievements-engine <span>2.1.0</span>
         </a>
         <span className="strip-plus">+</span>
         <a href="https://www.npmjs.com/package/react-achievements">
-          <Code2 size={17} /> react-achievements <span>5.0.2</span>
+          <Code2 size={17} /> react-achievements <span>6.0.0</span>
         </a>
       </div>
       <section className="journeys">

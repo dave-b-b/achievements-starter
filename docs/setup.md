@@ -2,7 +2,7 @@
 
 ## Public experience: no accounts required
 
-Use Node.js 24 and npm 11. The repository pins React Achievements 5.0.2, Engine 2.0.2, Next.js 16.4.3, and React 19.3.1. TypeScript 6.0.3 retains the compiler API used to verify exported code.
+Use Node.js 24 and npm 11. The repository pins React Achievements 6.0.0, Engine 2.1.0, Next.js 16.4.3, and React 19.3.1. TypeScript 6.0.3 retains the compiler API used to verify exported code.
 
 ```sh
 git clone https://github.com/dave-b-b/achievements-starter.git
