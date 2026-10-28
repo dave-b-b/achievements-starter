@@ -103,6 +103,24 @@ export function GuidedTour(props: GuidedTourProps) {
   });
 
   useEffect(() => {
+    try {
+      if (localStorage.getItem(`learnquest:tour:${kind}:v1`)) return;
+    } catch {
+      // A blocked preference store must not prevent the guide from working.
+    }
+    controls.reset(true);
+  }, [controls, kind]);
+
+  useEffect(() => {
+    if (state.status !== 'finished' && state.status !== 'skipped') return;
+    try {
+      localStorage.setItem(`learnquest:tour:${kind}:v1`, state.status);
+    } catch {
+      // Visitors can still dismiss and replay the guide without browser storage.
+    }
+  }, [kind, state.status]);
+
+  useEffect(() => {
     if (state.status !== 'running') return;
     function escape(event: KeyboardEvent) {
       if (event.key === 'Escape') {

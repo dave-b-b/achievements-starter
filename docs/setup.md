@@ -69,5 +69,5 @@ A local PostgreSQL installation or isolated Postgres container works. The test a
 - **Sign-in is unavailable:** all three Supabase URL/key/database variables must be configured. A paused Free project must be resumed in Supabase.
 - **Completion returns a retry message:** confirm migrations, database connectivity, the runtime pooler URL, and the server role. Retries count an existing lesson once.
 - **A mutation is rejected:** `APP_ORIGIN` must match the browser's exact origin, including scheme and port. Use the canonical deployment URL.
-- **TLS validation fails:** use the provider's supported connection settings and, if necessary, its CA certificate through `DATABASE_CA_FILE`. Do not disable certificate verification.
+- **TLS validation fails:** download the root certificate from Supabase Database Settings. Supply its PEM with real newlines through `DATABASE_CA_CERT` in the hosting environment, or point `DATABASE_CA_FILE` at the downloaded file locally. The Supabase pooler uses this certificate authority; the default Node trust store is insufficient. Keep certificate verification enabled. The migration command supports both settings as well.
 - **Exported code fails:** install the documented SDK versions, use a `.tsx` file, and retain the complete provider wrapper. Reproduce with `npm run verify:examples` before opening a bug.

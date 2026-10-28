@@ -31,7 +31,7 @@ Both experiences live in this repository and one deployment. The two SDKs retain
 ### Interactive playground: `/playground`
 
 - Three presets: onboarding, learning, and task completion.
-- Builder-based rule definitions and exports, plus optional React Joyride tours for playground discovery and setup.
+- Builder-based rule definitions and exports, plus automatic first-visit React Joyride tours for playground discovery and setup, with dismissal and replay.
 - Safe numeric and boolean controls for rules, plus supported title, icon, and theme options.
 - Action buttons, a live preview using the real SDKs, and a reset action.
 - Complete copyable integration code, a browser-runnable minimal example, and a link to the full starter.

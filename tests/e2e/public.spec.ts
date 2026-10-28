@@ -15,6 +15,8 @@ test('a real unlock works on the landing page', async ({ page }) => {
 });
 test('playground presets, customization, and reset use actual SDK state', async ({ page }) => {
   await page.goto('/playground');
+  await expect(page.getByRole('alertdialog')).toBeVisible();
+  await page.getByRole('button', { name: 'Skip tour', exact: true }).click();
   for (let i = 0; i < 3; i++)
     await page.getByRole('button', { name: 'Complete a lesson', exact: true }).click();
   await expect(
@@ -101,13 +103,11 @@ test('capture the actual product for the repository', async ({ page }, testInfo)
   });
 });
 
-test('optional playground tour demonstrates a real unlock, finishes, and replays', async ({
+test('automatic playground tour demonstrates a real unlock, remembers completion, and replays', async ({
   page,
 }) => {
   await page.goto('/playground');
-  await expect(page.getByRole('alertdialog')).toHaveCount(0);
   const start = page.getByRole('button', { name: 'Show me around', exact: true });
-  await start.click();
   let dialog = page.getByRole('alertdialog');
   await expect(dialog).toContainText('Start with a familiar moment');
   await dialog.getByRole('button', { name: /Next/ }).click();
@@ -131,6 +131,13 @@ test('optional playground tour demonstrates a real unlock, finishes, and replays
   await expect(dialog).toContainText('Take the working code with you');
   await dialog.getByRole('button', { name: 'Got it', exact: true }).click();
   await expect(page.getByRole('alertdialog')).toHaveCount(0);
+  await page.reload();
+  await expect(start).toBeVisible();
+  await page.getByRole('button', { name: 'Complete a lesson', exact: true }).click();
+  await expect(
+    page.getByRole('progressbar', { name: 'Preview achievement progress' }),
+  ).toHaveAttribute('value', '1');
+  await expect(page.getByRole('alertdialog')).toHaveCount(0);
   await start.click();
   dialog = page.getByRole('alertdialog');
   await expect(dialog).toContainText('Start with a familiar moment');
@@ -140,9 +147,11 @@ test('optional playground tour demonstrates a real unlock, finishes, and replays
 
 test('Escape exits the tour and leaves the preview usable', async ({ page }) => {
   await page.goto('/playground');
-  await page.getByRole('button', { name: 'Show me around', exact: true }).click();
   await expect(page.getByRole('alertdialog')).toBeVisible();
   await page.keyboard.press('Escape');
+  await expect(page.getByRole('alertdialog')).toHaveCount(0);
+  await page.reload();
+  await expect(page.getByRole('button', { name: 'Show me around', exact: true })).toBeVisible();
   await expect(page.getByRole('alertdialog')).toHaveCount(0);
   await page.getByRole('button', { name: 'Complete a lesson', exact: true }).click();
   await expect(
@@ -152,7 +161,6 @@ test('Escape exits the tour and leaves the preview usable', async ({ page }) => 
 
 test('setup guide walks through minimal, saved progress, and free hosting', async ({ page }) => {
   await page.goto('/setup');
-  await page.getByRole('button', { name: 'Guide me through setup', exact: true }).click();
   const dialog = page.getByRole('alertdialog');
   await expect(dialog).toContainText('Get your first unlock quickly');
   await dialog.getByRole('button', { name: /Next/ }).click();
@@ -161,4 +169,29 @@ test('setup guide walks through minimal, saved progress, and free hosting', asyn
   await expect(dialog).toContainText('Put it online on the free plans');
   await dialog.getByRole('button', { name: 'Got it', exact: true }).click();
   await expect(page.getByRole('alertdialog')).toHaveCount(0);
+  await page.reload();
+  await expect(
+    page.getByRole('button', { name: 'Guide me through setup', exact: true }),
+  ).toBeVisible();
+  await expect(page.getByRole('alertdialog')).toHaveCount(0);
+  await page.goto('/playground');
+  await expect(page.getByRole('alertdialog')).toContainText('Start with a familiar moment');
+});
+
+test('automatic tour can be dismissed and replayed when browser storage is blocked', async ({
+  page,
+}) => {
+  await page.addInitScript(() => {
+    Object.defineProperty(window, 'localStorage', {
+      get() {
+        throw new DOMException('Storage is blocked', 'SecurityError');
+      },
+    });
+  });
+  await page.goto('/setup');
+  await expect(page.getByRole('alertdialog')).toContainText('Get your first unlock quickly');
+  await page.keyboard.press('Escape');
+  await expect(page.getByRole('alertdialog')).toHaveCount(0);
+  await page.getByRole('button', { name: 'Guide me through setup', exact: true }).click();
+  await expect(page.getByRole('alertdialog')).toContainText('Get your first unlock quickly');
 });

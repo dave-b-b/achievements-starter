@@ -7,6 +7,11 @@ export function getDatabase() {
   if (!database) {
     const host = new URL(process.env.DATABASE_URL).hostname;
     const local = ['localhost', '127.0.0.1', '[::1]'].includes(host);
+    const ca =
+      process.env.DATABASE_CA_CERT ||
+      (process.env.DATABASE_CA_FILE
+        ? readFileSync(process.env.DATABASE_CA_FILE, 'utf8')
+        : undefined);
     database = postgres(process.env.DATABASE_URL, {
       prepare: false,
       max: 1,
@@ -16,9 +21,7 @@ export function getDatabase() {
         ? false
         : {
             rejectUnauthorized: true,
-            ...(process.env.DATABASE_CA_FILE
-              ? { ca: readFileSync(process.env.DATABASE_CA_FILE, 'utf8') }
-              : {}),
+            ...(ca ? { ca } : {}),
           },
     });
   }

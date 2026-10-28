@@ -2,7 +2,7 @@
 
 A Next.js reference application and interactive playground for [achievements-engine](https://github.com/dave-b-b/achievements-engine) and [react-achievements](https://github.com/dave-b-b/react-achievements).
 
-**Status: implementation and local verification.** The public demo and playground run without accounts. Saved course progress requires the Supabase setup below. The public deployment URL will be added after provider verification.
+**[Try the live demo](https://achievements-starter.vercel.app)** — deployed on Vercel Hobby. The public demo, builder playground, lessons, and guided tours work without accounts. Production sign-in and saved progress are not configured yet; see [verification status](docs/verification.md).
 
 ![LearnQuest overview](public/screenshots/overview-desktop.png)
 
@@ -26,7 +26,7 @@ Open **http://127.0.0.1:3417**. No credentials are needed to explore. See the [f
 | `/playground` | Try three presets without signing in, change thresholds and appearance, trigger achievements, and copy a complete working integration. |
 | `/learn`      | Read three short lessons, sign in to save completion, unlock three milestones, and return to persistent progress.                      |
 
-The demo and exported examples use `AchievementBuilder` throughout. Optional guided tours help visitors reach a first unlock and follow the setup path.
+The demo and exported examples use `AchievementBuilder` throughout. Guided tours start automatically on the first visit to the playground and setup pages. Visitors can skip them, and their browser remembers completion or dismissal. The guide buttons replay either tour at any time.
 
 The starter consumes published SDK releases. It demonstrates authentication, database persistence, accessible UI, and safe retries without copying the SDK implementations into this repository.
 
