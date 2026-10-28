@@ -1,19 +1,34 @@
 # Achievements Starter
 
-A planned Next.js reference application and interactive playground for [achievements-engine](https://github.com/dave-b-b/achievements-engine) and [react-achievements](https://github.com/dave-b-b/react-achievements).
+A Next.js reference application and interactive playground for [achievements-engine](https://github.com/dave-b-b/achievements-engine) and [react-achievements](https://github.com/dave-b-b/react-achievements).
 
-**Status: planning.** This repository currently contains the product plan, architecture, and implementation roadmap. The application, live demo, screenshots, and runnable setup instructions will be added as the milestones ship.
+**Status: implementation and local verification.** The public demo and playground run without accounts. Saved course progress requires the Supabase setup below. The public deployment URL will be added after provider verification.
+
+![LearnQuest overview](public/screenshots/overview-desktop.png)
+
+## Run locally
+
+Use Node.js 24:
+
+```sh
+npm ci
+npm run dev
+```
+
+Open **http://127.0.0.1:3417**. No credentials are needed to explore. See the [full setup guide](docs/setup.md) for authentication and persistence, the [free deployment guide](docs/deployment.md), and [verification status](docs/verification.md).
 
 ## What we're building
 
 **LearnQuest** is the example application: a short course that teaches developers to add achievements to an app while demonstrating saved progress and achievement unlocks.
 
-| Experience | Planned behavior |
-| --- | --- |
+| Experience    | Behavior                                                                                                                               |
+| ------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
 | `/playground` | Try three presets without signing in, change thresholds and appearance, trigger achievements, and copy a complete working integration. |
-| `/learn` | Read three short lessons, sign in to save completion, unlock three milestones, and return to persistent progress. |
+| `/learn`      | Read three short lessons, sign in to save completion, unlock three milestones, and return to persistent progress.                      |
 
-The starter will consume published SDK releases. It will demonstrate authentication, database persistence, accessible UI, and safe retries without copying the SDK implementations into this repository.
+The demo and exported examples use `AchievementBuilder` throughout. Optional guided tours help visitors reach a first unlock and follow the setup path.
+
+The starter consumes published SDK releases. It demonstrates authentication, database persistence, accessible UI, and safe retries without copying the SDK implementations into this repository.
 
 ## Start here
 
@@ -23,19 +38,19 @@ The starter will consume published SDK releases. It will demonstrate authenticat
 - [Contributing](CONTRIBUTING.md): how to contribute during planning and implementation.
 - [Issues](https://github.com/dave-b-b/achievements-starter/issues): implementation tasks and acceptance criteria.
 
-## Proposed stack
+## Stack
 
-Next.js App Router, TypeScript, Supabase Auth and Postgres, and Vercel. Exact runtime and dependency versions will be selected and locked in the first implementation milestone.
+Next.js 16.4.3, React 19.3.1, TypeScript 6.0.3, Supabase Auth/Postgres, and Vercel Hobby. SDK versions are pinned at Engine 2.0.2 and React Achievements 5.0.2, with a committed lockfile.
 
-The first technical milestone is one complete journey: **sign in → complete one lesson → save progress and achievement state together → reload and see the result preserved**.
+The server-backed journey is: **sign in → complete one lesson → save progress and achievement state together → reload and see the result preserved**.
 
 ## Project boundaries
 
-| Repository | Owns |
-| --- | --- |
-| [achievements-engine](https://github.com/dave-b-b/achievements-engine) | Rule evaluation, achievement state, persistence contracts, and shared server contracts. |
-| [react-achievements](https://github.com/dave-b-b/react-achievements) | React providers, hooks, widgets, and presentation. |
-| This repository | Lessons, authentication, database adapter and migrations, application routes, playground, deployment, and onboarding examples. |
+| Repository                                                             | Owns                                                                                                                           |
+| ---------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| [achievements-engine](https://github.com/dave-b-b/achievements-engine) | Rule evaluation, achievement state, persistence contracts, and shared server contracts.                                        |
+| [react-achievements](https://github.com/dave-b-b/react-achievements)   | React providers, hooks, widgets, and presentation.                                                                             |
+| This repository                                                        | Lessons, authentication, database adapter and migrations, application routes, playground, deployment, and onboarding examples. |
 
 SDK changes should be made in their owning repositories and linked from the issue that needs them. This application should use their published versions after those changes are released.
 

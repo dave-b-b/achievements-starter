@@ -1,6 +1,6 @@
 # Implementation roadmap
 
-Application implementation has not started. The repository setup is complete; every issue below is open work.
+The application is implemented and undergoing local verification. Provider setup, fresh-developer review, and beta outcomes remain pending. Issue status is updated only when its full acceptance is met. See [verification](verification.md) for the environment actually exercised.
 
 The [product plan](product-plan.md) defines the scope and release acceptance. The [architecture](architecture.md) defines ownership and consistency boundaries. GitHub issues hold task acceptance and progress; this page is their dependency index.
 
@@ -47,6 +47,8 @@ A verified public deployment, aggregate funnel measurements, beta feedback, and 
 - [#10: Measure the onboarding funnel and run the developer beta](https://github.com/dave-b-b/achievements-starter/issues/10) — dependencies: #5, #7, #8.
 - [#11: Deploy the verified demo and publish the walkthrough and case study](https://github.com/dave-b-b/achievements-starter/issues/11) — dependencies: #4, #5, #7, #8, #9, #10.
 
+- [#12: Guide first-time visitors with optional React Joyride tours](https://github.com/dave-b-b/achievements-starter/issues/12) — dependencies: #6, #7; implemented with desktop/mobile coverage.
+
 ## Execution order
 
 Begin with #1, then build the authenticated one-lesson journey through #2–#4. Complete the course in #5. The playground (#6–#7) can proceed after #1 if contributor capacity allows. Finish setup and upstream onboarding work (#8–#9), then beta feedback and launch (#10–#11). Follow each issue’s explicit dependencies before starting it.
@@ -55,8 +57,8 @@ No due dates are assigned. Re-estimate after the first authenticated transaction
 
 ## Cross-repository work
 
-SDK issues and pull requests belong in their owning repositories. Issue #9 coordinates the documentation audit and links verified upstream changes. Any implementation gap found earlier should be linked from its consuming issue, released upstream, and consumed here through published versions.
+SDK issues and pull requests belong in their owning repositories. Issue #9 coordinates the documentation audit. Verified upstream gaps are tracked in [engine #14](https://github.com/dave-b-b/achievements-engine/issues/14) and [React #93](https://github.com/dave-b-b/react-achievements/issues/93). Any implementation gap found earlier should be linked from its consuming issue, released upstream, and consumed here through published versions.
 
 ## Current next action
 
-Implement #1: establish the runtime and package scripts, install a verified published SDK pair, and demonstrate one local unlock. No hosting credentials are needed to complete that first task.
+Finish browser verification, connect the intended Free provider projects, exercise real OAuth and database API isolation, and publish the verified deployment URL. External beta outcomes remain open until measured.

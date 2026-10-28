@@ -1,6 +1,6 @@
 name: Feature request
 description: Propose an improvement to the starter, playground, or onboarding.
-title: "Proposal: "
+title: 'Proposal: '
 body:
   - type: textarea
     id: problem

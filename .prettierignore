@@ -1,0 +1,10 @@
+node_modules/
+.next/
+public/screenshots/
+package-lock.json
+examples/minimal/package-lock.json
+examples/minimal/dist/
+coverage/
+test-results/
+playwright-report/
+next-env.d.ts

@@ -31,6 +31,7 @@ Both experiences live in this repository and one deployment. The two SDKs retain
 ### Interactive playground: `/playground`
 
 - Three presets: onboarding, learning, and task completion.
+- Builder-based rule definitions and exports, plus optional React Joyride tours for playground discovery and setup.
 - Safe numeric and boolean controls for rules, plus supported title, icon, and theme options.
 - Action buttons, a live preview using the real SDKs, and a reset action.
 - Complete copyable integration code, a browser-runnable minimal example, and a link to the full starter.
@@ -51,14 +52,14 @@ The application will not depend on an additional adapter package for v1. Its tra
 
 ## Core journeys
 
-| Journey | Steps | Successful outcome |
-| --- | --- | --- |
-| Discover | Open playground → choose preset → trigger an action | First achievement is understandable and can be unlocked in about 30 seconds. |
-| Customize | Edit safe settings → preview → copy code | The copied example reproduces the chosen configuration and builds against the documented versions. |
-| Integrate | Open minimal example → install packages → follow quick start | A developer reaches a first local unlock without filling in missing implementation. |
-| Learn | Read lesson → sign in → complete lesson | Server validates the request and returns persisted progress and newly unlocked achievements. |
-| Return | Sign out → sign back in or use a second session | Previously committed progress is restored for that account. |
-| Recover | Retry a request after a failure or lost response | A lesson counts once and committed state remains consistent. |
+| Journey   | Steps                                                        | Successful outcome                                                                                 |
+| --------- | ------------------------------------------------------------ | -------------------------------------------------------------------------------------------------- |
+| Discover  | Open playground → choose preset → trigger an action          | First achievement is understandable and can be unlocked in about 30 seconds.                       |
+| Customize | Edit safe settings → preview → copy code                     | The copied example reproduces the chosen configuration and builds against the documented versions. |
+| Integrate | Open minimal example → install packages → follow quick start | A developer reaches a first local unlock without filling in missing implementation.                |
+| Learn     | Read lesson → sign in → complete lesson                      | Server validates the request and returns persisted progress and newly unlocked achievements.       |
+| Return    | Sign out → sign back in or use a second session              | Previously committed progress is restored for that account.                                        |
+| Recover   | Retry a request after a failure or lost response             | A lesson counts once and committed state remains consistent.                                       |
 
 ## Release acceptance
 
@@ -76,12 +77,12 @@ The application will not depend on an additional adapter package for v1. Its tra
 
 Recruit 5–10 developers for the initial onboarding review. Record observed steps, time to first unlock, points of confusion, and whether they can complete the minimal integration without maintainer help.
 
-| Measure | Initial use |
-| --- | --- |
-| Playground visits → first unlock | Understand whether visitors reach and recognize value. |
-| First unlock → copy example or open starter | Understand whether the demo creates integration interest. |
-| Successful integrations reported voluntarily | Confirm use beyond the demo. |
-| Package downloads by package and reporting window | Track distribution over a rolling four-week period. |
+| Measure                                           | Initial use                                               |
+| ------------------------------------------------- | --------------------------------------------------------- |
+| Playground visits → first unlock                  | Understand whether visitors reach and recognize value.    |
+| First unlock → copy example or open starter       | Understand whether the demo creates integration interest. |
+| Successful integrations reported voluntarily      | Confirm use beyond the demo.                              |
+| Package downloads by package and reporting window | Track distribution over a rolling four-week period.       |
 
 Initial learning targets are eight of ten testers completing the minimal integration without help and three confirmed external integrations. These targets guide iteration; they are not launch claims.
 
