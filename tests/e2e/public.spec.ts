@@ -116,6 +116,7 @@ test('automatic playground tour demonstrates a real unlock, remembers completion
   await expect(
     page.getByRole('button', { name: 'Achievement unlocked', exact: true }),
   ).toBeDisabled();
+  await expect(page.getByTestId('floater')).toHaveCSS('opacity', '1');
   const accessibility = await new AxeBuilder({ page })
     .withTags(['wcag2a', 'wcag2aa', 'wcag21aa'])
     .analyze();
