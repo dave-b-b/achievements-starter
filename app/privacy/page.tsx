@@ -13,6 +13,11 @@ export default function Page() {
           The playground runs in browser memory. Its configurations and progress are not saved to
           your course account. Reloading or resetting starts the preview again.
         </p>
+        <p>
+          Your browser also remembers whether you finished or dismissed each guided tour, so it does
+          not automatically repeat. These preferences stay in local storage and are not sent to the
+          server. The guide buttons let you replay the tours.
+        </p>
         <h2>Saved course progress</h2>
         <p>
           Signing in uses GitHub through Supabase Auth. Supabase handles authentication and session

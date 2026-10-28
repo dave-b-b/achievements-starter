@@ -91,7 +91,7 @@ Serialize learning mutations in the UI for v1, reconcile from the returned snaps
 
 All demonstrated rule definitions use the published `AchievementBuilder` API. Numeric presets use `create().withMetric().withCondition().withAward().build()`; boolean milestones use `createBooleanAchievement().withAward().toConfig()`. Course milestones use distinct derived boolean metrics so combining builders cannot overwrite custom conditions under one metric key.
 
-The app uses React Joyride 3.2.0 for optional, on-demand playground and setup tours. Targets use explicit `data-tour` attributes. A tour button calls the real preview tracking function to demonstrate an unlock. Tour state is separate from preview resets and saved account progress. Skip, close, Escape, and replay are supported; scroll animation is disabled and focus trapping remains enabled. Tours are application UI, not an SDK requirement.
+The app uses React Joyride 3.2.0 for playground and setup tours that start automatically on each page's first visit. The browser remembers completion or dismissal separately for each tour in local storage; blocked storage does not prevent starting, dismissing, or replaying a guide. Targets use explicit `data-tour` attributes. A tour button calls the real preview tracking function to demonstrate an unlock. Tour state is separate from preview resets and saved account progress. Skip, close, Escape, and replay are supported; scroll animation is disabled and focus trapping remains enabled. Tours are application UI, not an SDK requirement.
 
 ## Playground and code export
 

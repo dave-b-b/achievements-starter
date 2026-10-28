@@ -6,7 +6,7 @@ Date: 2026-10-28. This file distinguishes implemented behavior from provider set
 
 - Next.js application consuming published Engine 2.0.2 and React Achievements 5.0.2 releases.
 - Builder-based definitions across the landing demo, playground, course, copied code, and independent minimal React example.
-- Optional React Joyride 3.2.0 tours for playground discovery and starter setup, including a real preview unlock.
+- Automatic first-visit React Joyride 3.2.0 tours for playground discovery and starter setup, including a real preview unlock, remembered completion/dismissal, and manual replay.
 - Safe three-preset playground, customization/reset, code export/download, and independent minimal React example.
 - Three public lessons, server-backed React client, authenticated completion and snapshot routes, and saved-progress UI.
 - Cookie-based Supabase OAuth flow, request origin checks, server-derived subject IDs, and server-only database wiring.
@@ -19,6 +19,7 @@ Date: 2026-10-28. This file distinguishes implemented behavior from provider set
 - Eight real Postgres scenarios cover isolated users, multiple database clients, duplicate and distinct concurrent requests, injected save-failure rollback, lost-response retry, unknown lesson rejection, and denied reads/writes under browser-facing roles.
 - Export verification type-checks and production-builds all three generated presets in the independent minimal project.
 - Twenty-eight desktop and mobile browser scenarios passed, covering public journeys, accessibility rules, keyboard-scrollable code, horizontal overflow, screenshot capture, guided-tour completion/skip/replay, Escape dismissal, and tour-driven real unlocks.
+- The automatic first-visit update passed fourteen focused desktop/mobile scenarios: initial start, completion and dismissal remembered across reloads, manual replay, separate setup/playground preferences, blocked storage, live preview actions, and accessibility on both guided pages.
 
 The first database run exposed doubly serialized JSON state. The adapter now sends serialized state as text before the JSONB cast; the rollback, retry, and concurrency scenarios pass with the real SDK.
 
