@@ -1497,11 +1497,38 @@ progress::-moz-progress-bar {
 }
 .arcade-achievement-notice {
   position: absolute;
-  left: 50%;
-  right: auto;
-  transform: translateX(-50%);
+  left: auto;
+  right: 10px;
+  transform: none;
   z-index: 4;
-  max-width: calc(100% - 24px);
+  width: max-content;
+  max-width: min(180px, calc(100% - 20px));
+  min-height: 30px;
+  display: flex;
+  gap: 6px;
+  padding: 4px 7px;
+  border-radius: 999px;
+  box-shadow: 0 4px 16px #090d2980;
+}
+.arcade-achievement-notice .notice-icon {
+  font-size: 16px;
+  line-height: 1;
+}
+.arcade-achievement-notice strong {
+  min-width: 0;
+  font-size: 11px;
+  line-height: 1.1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.arcade-achievement-notice button {
+  padding: 0;
+  margin-left: auto;
+}
+.arcade-achievement-notice button svg {
+  width: 13px;
+  height: 13px;
 }
 .arcade-stage canvas {
   display: block;
@@ -1558,6 +1585,94 @@ progress::-moz-progress-bar {
 .arcade-overlay small {
   color: #c3b3d7;
   font-size: 10px;
+}
+.arcade-overlay-won {
+  gap: 9px;
+  padding: 16px 22px;
+}
+.arcade-overlay-won h2 {
+  font-size: clamp(23px, 3vw, 30px);
+}
+.arcade-overlay-won .button {
+  margin-top: 2px;
+}
+.arcade-finale {
+  width: min(100%, 370px);
+  display: grid;
+  gap: 9px;
+  text-align: left;
+}
+.arcade-final-award {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 14px;
+  border: 1px solid #e1c88c;
+  border-radius: 13px;
+  background: #31274e;
+  box-shadow: 0 8px 28px #090d2980;
+}
+.arcade-final-award > span {
+  color: #f3cf80;
+  font-size: 42px;
+  line-height: 1;
+}
+.arcade-final-award small {
+  display: block;
+  color: #f3cf80;
+  font-size: 9px;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+.arcade-final-award strong {
+  display: block;
+  font-size: 20px;
+  line-height: 1.25;
+}
+.arcade-final-award p {
+  font-size: 11px;
+  line-height: 1.3;
+}
+.arcade-earned-awards > strong {
+  display: block;
+  color: #e4d4fa;
+  font-size: 10px;
+  letter-spacing: 0.6px;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+}
+.arcade-earned-awards ul {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 5px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.arcade-earned-awards li {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  min-width: 0;
+  padding: 5px 7px;
+  border: 1px solid #ffffff35;
+  border-radius: 7px;
+  background: #15172bc9;
+  color: #c1b6d2;
+  font-size: 13px;
+  white-space: nowrap;
+}
+.arcade-earned-awards li.earned {
+  color: #fff;
+  border-color: #e1c88c80;
+}
+.arcade-earned-awards li > span {
+  color: #f3cf80;
+  font-size: 14px;
+}
+.arcade-earned-awards li small {
+  margin-left: auto;
+  font-size: 8px;
 }
 .arcade-toolbar {
   padding: 14px 18px;

@@ -1,5 +1,11 @@
 import { AchievementBuilder } from 'achievements-engine';
 
+export const finalArcadeAward = {
+  title: 'Star pilot',
+  description: 'Survive all three waves.',
+  icon: '★',
+};
+
 export const arcadeAchievements = AchievementBuilder.combine([
   AchievementBuilder.createScoreAchievement(100).withAward({
     title: 'First contact',
@@ -21,9 +27,5 @@ export const arcadeAchievements = AchievementBuilder.combine([
     description: 'Destroy three scouts with less than 3 seconds between hits.',
     icon: 'ϟ',
   }),
-  AchievementBuilder.createBooleanAchievement('missionComplete').withAward({
-    title: 'Star pilot',
-    description: 'Survive all three waves.',
-    icon: '★',
-  }),
+  AchievementBuilder.createBooleanAchievement('missionComplete').withAward(finalArcadeAward),
 ]);
