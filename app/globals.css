@@ -1497,35 +1497,38 @@ progress::-moz-progress-bar {
 }
 .arcade-achievement-notice {
   position: absolute;
-  left: 50%;
-  right: auto;
-  transform: translateX(-50%);
+  left: auto;
+  right: 10px;
+  transform: none;
   z-index: 4;
-  width: min(250px, calc(100% - 24px));
-  grid-template-columns: 25px 1fr 16px;
-  gap: 7px;
-  padding: 9px 10px;
-  border-radius: 10px;
+  width: max-content;
+  max-width: min(180px, calc(100% - 20px));
+  min-height: 30px;
+  display: flex;
+  gap: 6px;
+  padding: 4px 7px;
+  border-radius: 999px;
+  box-shadow: 0 4px 16px #090d2980;
 }
 .arcade-achievement-notice .notice-icon {
-  font-size: 20px;
-}
-.arcade-achievement-notice .notice-eyebrow {
-  font-size: 8px;
-  margin-bottom: 2px;
+  font-size: 16px;
+  line-height: 1;
 }
 .arcade-achievement-notice strong {
-  font-size: 12px;
-}
-.arcade-achievement-notice p {
-  display: none;
+  min-width: 0;
+  font-size: 11px;
+  line-height: 1.1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .arcade-achievement-notice button {
   padding: 0;
+  margin-left: auto;
 }
 .arcade-achievement-notice button svg {
-  width: 14px;
-  height: 14px;
+  width: 13px;
+  height: 13px;
 }
 .arcade-stage canvas {
   display: block;

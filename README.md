@@ -35,7 +35,7 @@ The starter consumes published SDK releases. It demonstrates authentication, dat
 
 ## Starfall arcade
 
-[Play Starfall](https://achievements-starter.vercel.app/arcade). Move with arrows or WASD, or drag your ship on touch. Firing is automatic; Space pauses. Real kills and wave clears feed the SDK: the next badge goal stays in the game HUD, compact unlock notifications appear on the playfield, and the victory screen highlights the final award alongside the full collection. The game pauses when hidden or when its collection opens. A new run resets only game state and game achievements; saved course progress is separate. Confetti respects reduced-motion preferences.
+[Play Starfall](https://achievements-starter.vercel.app/arcade). Move with arrows or WASD, or drag your ship on touch. Firing is automatic; Space pauses. Real kills and wave clears feed the SDK: the next badge goal stays in the game HUD, small corner notifications appear on the playfield, and the victory screen highlights the final award alongside the full collection. The game pauses when hidden or when its collection opens. A new run resets only game state and game achievements; saved course progress is separate. Confetti respects reduced-motion preferences.
 
 The simulation, collision rules, and builder definitions live in [`src/game`](src/game), and [`src/components/arcade.tsx`](src/components/arcade.tsx) connects gameplay events to the published SDK. It uses no game service, external asset host, account, or paid infrastructure.
 

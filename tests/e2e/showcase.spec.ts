@@ -65,6 +65,13 @@ test('Starfall gameplay earns a real badge, pauses for its collection, and start
   await expect(page.getByTestId('arcade-score')).not.toHaveText('0', { timeout: 10000 });
   const inGameNotice = page.locator('#arcade-stage').getByTestId('achievement-notice');
   await expect(inGameNotice).toContainText('First contact');
+  const noticeBounds = await inGameNotice.boundingBox();
+  const stageBounds = await page.locator('#arcade-stage').boundingBox();
+  expect(noticeBounds).not.toBeNull();
+  expect(stageBounds).not.toBeNull();
+  expect(noticeBounds!.width).toBeLessThan(190);
+  expect(noticeBounds!.height).toBeLessThan(45);
+  expect(noticeBounds!.x).toBeGreaterThan(stageBounds!.x + stageBounds!.width / 2);
   await expect(page.getByTestId('arcade-next-achievement')).not.toContainText('First contact');
   const collection = page.getByRole('button', { name: /^View all achievements:/ });
   await collection.click();

@@ -22,9 +22,28 @@ function AchievementNotice({
     const timer = setTimeout(() => close.current?.(), duration);
     return () => clearTimeout(timer);
   }, [duration]);
+  if (inGame) {
+    return (
+      <div
+        className="achievement-notice arcade-achievement-notice"
+        style={{ top: 10 + stackIndex * 38 }}
+        role="status"
+        aria-label={`Achievement unlocked: ${achievement.achievementTitle}`}
+        data-testid="achievement-notice"
+      >
+        <span className="notice-icon" aria-hidden="true">
+          {achievement.achievementIconKey || '✦'}
+        </span>
+        <strong>{achievement.achievementTitle}</strong>
+        <button onClick={onClose} aria-label="Dismiss achievement notification">
+          <X size={13} />
+        </button>
+      </div>
+    );
+  }
   return (
     <div
-      className={`achievement-notice notice-${theme || 'modern'}${inGame ? ' arcade-achievement-notice' : ''}`}
+      className={`achievement-notice notice-${theme || 'modern'}`}
       style={{ top: 16 + stackIndex * 116 }}
       role="status"
       data-testid="achievement-notice"
@@ -60,7 +79,7 @@ export function ArcadeAchievementNotice(props: NotificationProps) {
   }, [props.achievement.achievementTitle, props.duration]);
   // The victory screen renders the final SDK award at a larger size with the full collection.
   if (!stage || props.achievement.achievementTitle === finalArcadeAward.title) return null;
-  return createPortal(<AchievementNotice {...props} inGame />, stage);
+  return createPortal(<AchievementNotice {...props} duration={2400} inGame />, stage);
 }
 
 // The SDK owns unlock detection and confetti; this public UI override matches the starter.
