@@ -4,6 +4,7 @@ import { createPortal } from 'react-dom';
 import { X } from 'lucide-react';
 import type { NotificationProps, UIConfig } from 'react-achievements';
 import { AchievementDialog } from './achievement-collection';
+import { finalArcadeAward } from '../game/achievements';
 
 function AchievementNotice({
   achievement,
@@ -47,8 +48,19 @@ function AchievementNotice({
 // into the playfield so the reward appears beside the action that earned it.
 export function ArcadeAchievementNotice(props: NotificationProps) {
   const [stage, setStage] = useState<HTMLElement | null>(null);
+  const close = useRef(props.onClose);
   useEffect(() => setStage(document.getElementById('arcade-stage')), []);
-  return stage ? createPortal(<AchievementNotice {...props} inGame />, stage) : null;
+  useEffect(() => {
+    close.current = props.onClose;
+  }, [props.onClose]);
+  useEffect(() => {
+    if (props.achievement.achievementTitle !== finalArcadeAward.title) return;
+    const timer = setTimeout(() => close.current?.(), props.duration ?? 4500);
+    return () => clearTimeout(timer);
+  }, [props.achievement.achievementTitle, props.duration]);
+  // The victory screen renders the final SDK award at a larger size with the full collection.
+  if (!stage || props.achievement.achievementTitle === finalArcadeAward.title) return null;
+  return createPortal(<AchievementNotice {...props} inGame />, stage);
 }
 
 // The SDK owns unlock detection and confetti; this public UI override matches the starter.

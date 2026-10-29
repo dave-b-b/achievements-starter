@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { AchievementProvider, StorageType, useSimpleAchievements } from 'react-achievements';
 import { ArrowRight, Pause, Play, RotateCcw, Shield, Trophy } from 'lucide-react';
-import { arcadeAchievements } from '../game/achievements';
+import { arcadeAchievements, finalArcadeAward } from '../game/achievements';
 import {
   advanceGame,
   createGame,
@@ -29,8 +29,12 @@ function Mission({ autoStart, onReplay }: { autoStart: boolean; onReplay: () => 
   const game = useRef(createGame(autoStart));
   const controls = useRef<Controls>({ left: false, right: false, up: false, down: false });
   const [hud, setHud] = useState(() => view(game.current));
-  const { track, trackMultiple, unlockedCount, totalCount, nextAchievement } =
+  const { track, trackMultiple, allAchievements, unlockedCount, totalCount, nextAchievement } =
     useSimpleAchievements();
+  const finalAward = allAchievements.find(
+    (achievement) =>
+      achievement.achievementTitle === finalArcadeAward.title && achievement.isUnlocked,
+  );
   const reward = useRef((event: GameEvent) => {});
   reward.current = (event) => {
     if (event.type === 'kill') trackMultiple({ score: event.score, comboThree: event.combo >= 3 });
@@ -215,10 +219,12 @@ function Mission({ autoStart, onReplay }: { autoStart: boolean; onReplay: () => 
             the mission.
           </canvas>
           {hud.phase !== 'running' && (
-            <div className="arcade-overlay">
-              <span className="arcade-emblem" aria-hidden="true">
-                {hud.phase === 'won' ? '★' : '✦'}
-              </span>
+            <div className={`arcade-overlay${hud.phase === 'won' ? ' arcade-overlay-won' : ''}`}>
+              {hud.phase !== 'won' && (
+                <span className="arcade-emblem" aria-hidden="true">
+                  ✦
+                </span>
+              )}
               <span className="arcade-kicker">
                 {hud.phase === 'won'
                   ? 'MISSION COMPLETE'
@@ -242,6 +248,35 @@ function Mission({ autoStart, onReplay }: { autoStart: boolean; onReplay: () => 
                   ? `${hud.score.toLocaleString()} points. ${unlockedCount} achievements earned this run.`
                   : 'Dodge scout fire, clear three waves, and collect five real achievements. Your ship fires automatically.'}
               </p>
+              {hud.phase === 'won' && (
+                <div className="arcade-finale" data-testid="arcade-finale">
+                  {finalAward && (
+                    <div className="arcade-final-award" data-testid="arcade-final-award">
+                      <span aria-hidden="true">{finalAward.achievementIconKey || '★'}</span>
+                      <div>
+                        <small>Final achievement unlocked</small>
+                        <strong>{finalAward.achievementTitle}</strong>
+                        <p>{finalAward.achievementDescription}</p>
+                      </div>
+                    </div>
+                  )}
+                  <div className="arcade-earned-awards" data-testid="arcade-earned-awards">
+                    <strong>Awards this run</strong>
+                    <ul>
+                      {allAchievements.map((achievement) => (
+                        <li
+                          key={achievement.achievementId}
+                          className={achievement.isUnlocked ? 'earned' : ''}
+                        >
+                          <span aria-hidden="true">{achievement.achievementIconKey || '✦'}</span>
+                          {achievement.achievementTitle}
+                          <small>{achievement.isUnlocked ? 'Earned' : 'Not yet'}</small>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              )}
               <button className="button button-light" onClick={ended ? onReplay : play}>
                 <Play size={16} />{' '}
                 {ended ? 'Fly again' : hud.phase === 'paused' ? 'Resume mission' : 'Start mission'}{' '}
