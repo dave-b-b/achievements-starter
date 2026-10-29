@@ -1656,7 +1656,7 @@ progress::-moz-progress-bar {
   border-radius: 7px;
   background: #15172bc9;
   color: #c1b6d2;
-  font-size: 10px;
+  font-size: 13px;
   white-space: nowrap;
 }
 .arcade-earned-awards li.earned {
